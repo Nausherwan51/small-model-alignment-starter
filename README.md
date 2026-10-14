@@ -1,6 +1,23 @@
 # Small-Model Alignment Starter
 
-This branch is the student starter package for the SFT + DPO alignment assignment. It is intentionally minimal: it provides the tested environment metadata, assignment PDF, fixed evaluation/data files, and no completed training implementation.
+## Implemented PA2 Pipeline
+
+Original PyTorch SFT and DPO components are in `alignment/`, with the six grading
+wrappers connected in `submission_adapter.py`. Run `python -m pytest -q tests`
+for the supplied smoke tests and added numerical/training checks. SFT uses mean
+response-token NLL; DPO uses summed response log probabilities and a frozen SFT
+reference. No prebuilt trainers are used for these tracks.
+
+See `docs/training_runbook.md` for configurations, data preparation and launch
+commands. `kaggle/run_pipeline.py` runs SFT followed by independent HH and UF DPO
+from the same SFT best checkpoint. The private Kaggle input snapshot is prepared
+by `scripts/prepare_kaggle.py`; it excludes credentials and model caches. GPU
+execution is authorized by the user but experimental results must be checked
+from saved outputs. Persona LoRA-DPO and evaluation/report code are pending.
+
+The original starter provided the environment metadata, assignment PDF, fixed
+evaluation/data files, and adapter scaffold described below. This fork adds the
+implementation above; the remaining sections retain the assignment workflow.
 
 ## What Is Included
 

@@ -1,0 +1,11 @@
+{
+  "task": "dpo", "seed": 42, "model": "outputs/sft/best",
+  "train_examples": 15000, "validation_examples": 1000,
+  "max_length": 512, "batch_size": 1, "accumulation": 32,
+  "learning_rate": 0.000001, "weight_decay": 0.0,
+  "schedule": "constant", "warmup_ratio": 0.0,
+  "clip": 1.0, "epochs": 1, "eval_every": 100, "beta": 0.1,
+  "train_data": "outputs/prepared/uf_train.json",
+  "validation_data": "outputs/prepared/uf_validation.json",
+  "output": "outputs/dpo_uf"
+}

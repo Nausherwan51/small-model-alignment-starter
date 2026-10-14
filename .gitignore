@@ -1,2 +1,12 @@
 __pycache__/
 *.py[cod]
+.venv/
+.env
+.env.*
+!.env.example
+.kaggle/
+kaggle.json
+access_token
+.pytest_cache/
+outputs/
+tmp/

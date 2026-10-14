@@ -10,4 +10,7 @@ requires-python = ">=3.10"
 dependencies = []
 
 [tool.setuptools]
-packages = []
+py-modules = ["submission_adapter"]
+
+[tool.setuptools.packages.find]
+include = ["alignment*"]
