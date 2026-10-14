@@ -2,8 +2,32 @@
 
 These components were written while the independent Qwen SFT/main-DPO job was
 running. They do not modify that job or depend on its results to be implemented.
-Only code and CPU tests were run for persona/evaluation; no persona GPU job or
-judge inference calls have been submitted by this implementation turn.
+The first implementation turn ran only code and CPU tests. The user subsequently
+authorized the independent parallel GPU launch below. No judge inference calls
+have been submitted yet.
+
+## Parallel persona launch: 2026-10-15
+
+The tested persona launcher was pushed to the user's fork/main in commit
+`fe093d5`. It uses a separate private input dataset
+`nausherwan123/pa2-persona-inputs-20261015` and batch job version 1:
+https://www.kaggle.com/code/nausherwan123/pa2-persona-lora-dpo-20261015
+
+Source snapshot SHA-256:
+`133f4bec72a3bdad2574cfa94e2c8529550e272b4b0ebf03beeb018e2b6f4e1a`.
+The job verified its own T4x2 allocation, passed all 40 tests in the Kaggle
+container, and passed initial validation plus its first three GPU optimizer
+updates. Initial validation loss was 0.6931473 with strict reward accuracy zero,
+as expected for an unchanged reference/base and zero-initialized LoRA output.
+The policy subprocess exposes only cuda:0 to preserve effective batch 16.
+Timeout is 3,600 seconds. These startup checks are not final evaluation results.
+The original SFT/DPO job and its input version were not edited, restarted or
+cancelled. Both jobs were confirmed RUNNING after the persona submission.
+
+The existing 15-minute heartbeat now covers both jobs in one scheduled check,
+storing separate main/persona snapshots. It reports terminal states once and
+continues watching the remaining job. Scheduled model work consumes Codex
+allowance; Kaggle GPU execution consumes Kaggle quota independently.
 
 ## Persona LoRA-DPO
 
@@ -44,7 +68,7 @@ CUDA_VISIBLE_DEVICES=0 python -m alignment.persona --config configs/persona.json
 ```
 
 The host may have T4x2; this single-model adapter process intentionally uses one
-GPU. Full production persona training is still to be executed/validated.
+GPU. Production completion and evaluation results must be verified from saved outputs.
 
 ## Generation and the manual review gate
 
