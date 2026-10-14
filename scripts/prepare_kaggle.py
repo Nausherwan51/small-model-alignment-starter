@@ -12,6 +12,20 @@ import zipfile
 from pathlib import Path
 
 
+def source_paths(root):
+    """Explicit source/data allowlist shared by independent job packagers."""
+    files = [root / p for p in ("submission_adapter.py", "pyproject.toml", "requirements.txt", "README.md", "AGENTS.md")]
+    for folder, glob in (("alignment", "*.py"), ("tests", "*.py"), ("configs", "*.json"),
+                         ("docs", "*.md"), ("scripts", "*.py"), ("kaggle", "*.py")):
+        files.extend(sorted((root / folder).glob(glob)))
+    for relative in ("requirements-persona.txt", "data/persona_lora/README.md",
+                     "data/persona_lora/ramsay_style_preferences.json", "eval_sets/persona_eval_24_seed42.json"):
+        path = root / relative
+        if path.exists():
+            files.append(path)
+    return files
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--username", required=True)
@@ -27,15 +41,7 @@ def main():
     kernel = root / "outputs" / "kaggle_upload" / "kernel"
     dataset.mkdir(parents=True, exist_ok=True)
     kernel.mkdir(parents=True, exist_ok=True)
-    source_files = [root / p for p in ("submission_adapter.py", "pyproject.toml", "requirements.txt", "README.md", "AGENTS.md")]
-    for folder, glob in (("alignment", "*.py"), ("tests", "*.py"), ("configs", "*.json"),
-                         ("docs", "*.md"), ("scripts", "*.py"), ("kaggle", "*.py")):
-        source_files.extend(sorted((root / folder).glob(glob)))
-    for relative in ("requirements-persona.txt", "data/persona_lora/README.md",
-                     "data/persona_lora/ramsay_style_preferences.json", "eval_sets/persona_eval_24_seed42.json"):
-        path = root / relative
-        if path.exists():
-            source_files.append(path)
+    source_files = source_paths(root)
     with zipfile.ZipFile(dataset / "source.zip", "w", zipfile.ZIP_DEFLATED) as archive:
         for path in source_files:
             archive.write(path, path.relative_to(root).as_posix())

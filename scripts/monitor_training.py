@@ -43,6 +43,8 @@ def check(kernel, state_path, seconds=12):
                 continue
             if "RUN " in line and "alignment.training" in line:
                 stage = line.split("configs/")[-1].split("_resolved")[0]
+            elif "RUN " in line and "alignment.persona" in line:
+                stage = "persona"
             try:
                 value = json.loads(line)
                 if isinstance(value, dict) and "elapsed_seconds" in value:

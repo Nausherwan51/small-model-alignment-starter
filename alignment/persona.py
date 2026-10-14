@@ -4,6 +4,7 @@ import hashlib
 import importlib.metadata
 import json
 import random
+import time
 from pathlib import Path
 
 from alignment.data import content_id, write_json
@@ -56,14 +57,18 @@ def make_trainer(model, tokenizer, train_rows, val_rows, config, output):
     if not tokenizer.chat_template:
         raise ValueError("Persona training requires an explicit chat template")
     model.config.use_cache = False
+    started = time.monotonic()
 
     class ArtifactCallback(TrainerCallback):
         best = float("-inf")
 
         def on_log(self, args, state, control, logs=None, **kwargs):
             if logs:
+                record = {"elapsed_seconds": time.monotonic() - started, "step": state.global_step,
+                          "split": "validation" if any(k.startswith("eval_") for k in logs) else "train", **logs}
                 with (output / "metrics.jsonl").open("a", encoding="utf-8") as file:
-                    file.write(json.dumps({"step": state.global_step, **logs}) + "\n")
+                    file.write(json.dumps(record) + "\n")
+                print(json.dumps(record), flush=True)
 
         def on_evaluate(self, args, state, control, metrics=None, model=None, **kwargs):
             accuracy = metrics.get("eval_rewards/accuracies") if metrics else None
