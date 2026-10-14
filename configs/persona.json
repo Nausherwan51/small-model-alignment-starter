@@ -1,0 +1,11 @@
+{
+  "model": "HuggingFaceTB/SmolLM2-360M-Instruct", "seed": 42,
+  "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+  "data": "data/persona_lora/ramsay_style_preferences.json",
+  "evaluation_prompts": "eval_sets/persona_eval_24_seed42.json",
+  "output": "outputs/persona", "validation_size": 22,
+  "rank": 8, "alpha": 16, "dropout": 0.05,
+  "target_modules": ["q_proj", "v_proj"],
+  "learning_rate": 0.00005, "batch_size": 2, "accumulation": 8,
+  "epochs": 3, "beta": 0.1, "max_length": 512, "max_prompt_length": 256
+}

@@ -19,7 +19,8 @@ SFT passed its real forward/backward pilot, initial 1,000-example validation
 (response-token NLL 1.399577), and the first two optimizer updates, with finite
 gradient norms and neither update skipped. These are startup checks, not final
 training or evaluation results. The script proceeds to HH and UF DPO only after
-their preceding stages succeed. No recurring monitoring task is configured.
+their preceding stages succeed. At launch no recurring monitor was configured;
+a subsequent 15-minute monitor is documented in `persona_and_evaluation.md`.
 
 On Windows, pass a resolved native path to CLI uploads to avoid its relative
 upload-cache path bug, and use UTF-8 for live logs:

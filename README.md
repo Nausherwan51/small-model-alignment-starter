@@ -13,7 +13,9 @@ commands. `kaggle/run_pipeline.py` runs SFT followed by independent HH and UF DP
 from the same SFT best checkpoint. The private Kaggle input snapshot is prepared
 by `scripts/prepare_kaggle.py`; it excludes credentials and model caches. GPU
 execution is authorized by the user but experimental results must be checked
-from saved outputs. Persona LoRA-DPO and evaluation/report code are pending.
+from saved outputs. Persona LoRA-DPO, resumable generation, blinded comparisons
+and Kaggle judging code are described in `docs/persona_and_evaluation.md`.
+Persona GPU execution and end-to-end evaluation/report preparation are pending.
 
 The original starter provided the environment metadata, assignment PDF, fixed
 evaluation/data files, and adapter scaffold described below. This fork adds the
