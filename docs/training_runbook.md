@@ -1,5 +1,37 @@
 # Implemented SFT and original DPO
 
+## First authorized launch: 2026-10-15
+
+Implementation commit `1c508c2` was pushed to `main` on the user's fork only:
+https://github.com/Nausherwan51/small-model-alignment-starter
+
+Private input dataset: `nausherwan123/pa2-alignment-inputs-20261015`.
+Private batch job version 1:
+https://www.kaggle.com/code/nausherwan123/pa2-sft-dpo-20261015
+
+Source archive SHA-256:
+`4de54e09cd9bb479716d4d3b70a2f6128723bc8f6dabcb4ae68366310a0ebdbc`.
+The job verified two Tesla T4 GPUs and repeated all 29 tests successfully.
+Runtime versions were torch 2.11.0+cu128, Transformers 4.57.1, datasets 4.1.1,
+and accelerate 1.14.0. Existing CUDA PyTorch was preserved.
+
+SFT passed its real forward/backward pilot, initial 1,000-example validation
+(response-token NLL 1.399577), and the first two optimizer updates, with finite
+gradient norms and neither update skipped. These are startup checks, not final
+training or evaluation results. The script proceeds to HH and UF DPO only after
+their preceding stages succeed. No recurring monitoring task is configured.
+
+On Windows, pass a resolved native path to CLI uploads to avoid its relative
+upload-cache path bug, and use UTF-8 for live logs:
+
+```powershell
+$datasetFolder = (Resolve-Path outputs/kaggle_upload/dataset).Path
+$kernelFolder = (Resolve-Path outputs/kaggle_upload/kernel).Path
+$env:PYTHONUTF8 = '1'
+$env:PYTHONIOENCODING = 'utf-8'
+.\.venv\Scripts\kaggle.exe kernels logs --follow nausherwan123/pa2-sft-dpo-20261015
+```
+
 The user authorized training on 2026-10-15 after local tests. The earlier
 inspection-only restriction is superseded by that explicit instruction.
 
