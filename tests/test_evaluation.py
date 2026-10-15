@@ -131,3 +131,12 @@ def test_generation_sanity_gate_resume_and_provenance(tmp_path):
     assert model.calls == 5
     with pytest.raises(ValueError, match="different"):
         generate_saved(model, tokenizer, prompts, path, "different", {}, "instruction", {"weights": "fake"}, sanity_only=True)
+
+
+def test_long_generation_prompt_keeps_task_opening_and_response_boundary():
+    from alignment.generation import truncate_prompt
+    original = list(range(500))
+    result = truncate_prompt(original, 256)
+    assert len(result) == 256 and result[:224] == original[:224]
+    assert result[-32:] == original[-32:]
+    assert truncate_prompt(original[:20], 256) == original[:20]

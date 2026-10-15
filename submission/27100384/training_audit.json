@@ -1,0 +1,471 @@
+{
+  "student": "Nausherwan Khan Arzani",
+  "roll_number": "27100384",
+  "tracks": {
+    "sft": {
+      "config": {
+        "task": "sft",
+        "seed": 42,
+        "model": "Qwen/Qwen2.5-0.5B",
+        "train_examples": 30000,
+        "validation_examples": 1000,
+        "max_length": 512,
+        "batch_size": 2,
+        "accumulation": 16,
+        "learning_rate": 2e-05,
+        "weight_decay": 0.1,
+        "schedule": "cosine",
+        "warmup_ratio": 0.03,
+        "clip": 1.0,
+        "epochs": 1,
+        "eval_every": 200,
+        "beta": 0.1,
+        "train_data": "outputs/prepared/sft_train.json",
+        "validation_data": "outputs/prepared/sft_validation.json",
+        "output": "outputs/sft",
+        "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+        "source_sha256": "4de54e09cd9bb479716d4d3b70a2f6128723bc8f6dabcb4ae68366310a0ebdbc",
+        "data_manifest": {
+          "seed": 42,
+          "model": "Qwen/Qwen2.5-0.5B",
+          "model_revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+          "dataset_revisions": {
+            "HuggingFaceH4/ultrachat_200k": "8049631c405ae6576f93f445c6b8166f76f5505a",
+            "Anthropic/hh-rlhf": "09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa",
+            "HuggingFaceH4/ultrafeedback_binarized": "3949bf5f8c17c394422ccfab0c31ea9c20bdeb85",
+            "tatsu-lab/alpaca_eval": "2edc6fad8be6b14ea7230aabfd08188da6b8b814"
+          },
+          "prompt_template": "### Instruction:\n{instruction}\n\n### Response:\n",
+          "sampling": "seeded streaming shuffle, buffer 10000; first valid unique rows",
+          "max_prompt_tokens": 256,
+          "sft_turns": "first user/assistant exchange",
+          "hh_turns": "single-turn only; equal helpful-base/harmless-base mixture",
+          "files": {
+            "alpaca_eval_300_seed42.json": {
+              "sha256": "6cd4cb0bc1c9c5afa579f2cce7b7cebd71b480e08f3c407f9c0164ca17b8b394",
+              "rows": 300
+            },
+            "hh_eval_300_seed42.json": {
+              "sha256": "295ed7428937a3e8c611bd13c4aa85084d5dc1d7890e2faf057767aa28dd8042",
+              "rows": 300
+            },
+            "hh_train.json": {
+              "sha256": "52f7e0860c56f8b1147e51bb8d19c145165ef03c06d01e93545ed2eab9de3d94",
+              "rows": 15000
+            },
+            "hh_validation.json": {
+              "sha256": "ec7ff0b1a9e0706fc04a5704807bff0b33c7c6583fd14704c987bf67a97545f4",
+              "rows": 1000
+            },
+            "sft_train.json": {
+              "sha256": "d5c33814660b0116691f4361f5c100acacb75c77eb3248a13e111b915eb491ef",
+              "rows": 30000
+            },
+            "sft_validation.json": {
+              "sha256": "92080a2688de5d93875cd27dba88ad2a272286006148955a202642ac2b75c3dc",
+              "rows": 1000
+            },
+            "uf_train.json": {
+              "sha256": "e5c8ad923e9d22ad1aa3a2631d6baad6fb4185252680e8f132e2444d34cfd0c6",
+              "rows": 15000
+            },
+            "uf_validation.json": {
+              "sha256": "aba744884498be7c1e27743d6c78afb02a04e84d3471163be48d5b4e5b9c74d0",
+              "rows": 1000
+            }
+          }
+        },
+        "versions": {
+          "torch": "2.11.0+cu128",
+          "transformers": "4.57.1",
+          "datasets": "4.1.1",
+          "safetensors": "0.8.0"
+        },
+        "sft_reduction": "mean_scored_response_token_nll",
+        "policy_dtype": "float32",
+        "autocast_dtype": "float16",
+        "gpu_names": [
+          "Tesla T4",
+          "Tesla T4"
+        ]
+      },
+      "complete": {
+        "steps": 938,
+        "best_metric": 1.3659914461728067,
+        "final": {
+          "loss": 1.3659914461728067
+        },
+        "elapsed_seconds": 11110.997664690018
+      },
+      "best_step": 938,
+      "skipped_updates": 0,
+      "first_validation": {
+        "elapsed_seconds": 131.3962104320526,
+        "step": 0,
+        "split": "validation",
+        "loss": 1.3995770015420432
+      }
+    },
+    "dpo_hh": {
+      "config": {
+        "task": "dpo",
+        "seed": 42,
+        "model": "outputs/sft/best",
+        "train_examples": 15000,
+        "validation_examples": 1000,
+        "max_length": 512,
+        "batch_size": 1,
+        "accumulation": 32,
+        "learning_rate": 1e-06,
+        "weight_decay": 0.0,
+        "schedule": "constant",
+        "warmup_ratio": 0.0,
+        "clip": 1.0,
+        "epochs": 1,
+        "eval_every": 100,
+        "beta": 0.1,
+        "train_data": "outputs/prepared/hh_train.json",
+        "validation_data": "outputs/prepared/hh_validation.json",
+        "output": "outputs/dpo_hh",
+        "revision": null,
+        "source_sha256": "4de54e09cd9bb479716d4d3b70a2f6128723bc8f6dabcb4ae68366310a0ebdbc",
+        "data_manifest": {
+          "seed": 42,
+          "model": "Qwen/Qwen2.5-0.5B",
+          "model_revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+          "dataset_revisions": {
+            "HuggingFaceH4/ultrachat_200k": "8049631c405ae6576f93f445c6b8166f76f5505a",
+            "Anthropic/hh-rlhf": "09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa",
+            "HuggingFaceH4/ultrafeedback_binarized": "3949bf5f8c17c394422ccfab0c31ea9c20bdeb85",
+            "tatsu-lab/alpaca_eval": "2edc6fad8be6b14ea7230aabfd08188da6b8b814"
+          },
+          "prompt_template": "### Instruction:\n{instruction}\n\n### Response:\n",
+          "sampling": "seeded streaming shuffle, buffer 10000; first valid unique rows",
+          "max_prompt_tokens": 256,
+          "sft_turns": "first user/assistant exchange",
+          "hh_turns": "single-turn only; equal helpful-base/harmless-base mixture",
+          "files": {
+            "alpaca_eval_300_seed42.json": {
+              "sha256": "6cd4cb0bc1c9c5afa579f2cce7b7cebd71b480e08f3c407f9c0164ca17b8b394",
+              "rows": 300
+            },
+            "hh_eval_300_seed42.json": {
+              "sha256": "295ed7428937a3e8c611bd13c4aa85084d5dc1d7890e2faf057767aa28dd8042",
+              "rows": 300
+            },
+            "hh_train.json": {
+              "sha256": "52f7e0860c56f8b1147e51bb8d19c145165ef03c06d01e93545ed2eab9de3d94",
+              "rows": 15000
+            },
+            "hh_validation.json": {
+              "sha256": "ec7ff0b1a9e0706fc04a5704807bff0b33c7c6583fd14704c987bf67a97545f4",
+              "rows": 1000
+            },
+            "sft_train.json": {
+              "sha256": "d5c33814660b0116691f4361f5c100acacb75c77eb3248a13e111b915eb491ef",
+              "rows": 30000
+            },
+            "sft_validation.json": {
+              "sha256": "92080a2688de5d93875cd27dba88ad2a272286006148955a202642ac2b75c3dc",
+              "rows": 1000
+            },
+            "uf_train.json": {
+              "sha256": "e5c8ad923e9d22ad1aa3a2631d6baad6fb4185252680e8f132e2444d34cfd0c6",
+              "rows": 15000
+            },
+            "uf_validation.json": {
+              "sha256": "aba744884498be7c1e27743d6c78afb02a04e84d3471163be48d5b4e5b9c74d0",
+              "rows": 1000
+            }
+          }
+        },
+        "versions": {
+          "torch": "2.11.0+cu128",
+          "transformers": "4.57.1",
+          "datasets": "4.1.1",
+          "safetensors": "0.8.0"
+        },
+        "sft_reduction": "mean_scored_response_token_nll",
+        "policy_dtype": "float32",
+        "autocast_dtype": "float16",
+        "gpu_names": [
+          "Tesla T4",
+          "Tesla T4"
+        ]
+      },
+      "complete": {
+        "steps": 469,
+        "best_metric": 0.667,
+        "final": {
+          "loss": 0.6148117113038898,
+          "reward_accuracy": 0.667,
+          "reward_margin": 0.2866382718961686,
+          "chosen_reward": -0.25176513847673776,
+          "rejected_reward": -0.5384034102700752
+        },
+        "elapsed_seconds": 13059.451466321945
+      },
+      "best_step": 469,
+      "skipped_updates": 3,
+      "first_validation": {
+        "elapsed_seconds": 332.66549158096313,
+        "step": 0,
+        "split": "validation",
+        "loss": 0.6932093418836593,
+        "reward_accuracy": 0.504,
+        "reward_margin": -0.00011326404493593145,
+        "chosen_reward": 0.00033362193493826454,
+        "rejected_reward": 0.0004468859819405679
+      }
+    },
+    "dpo_uf": {
+      "config": {
+        "task": "dpo",
+        "seed": 42,
+        "model": "/kaggle/working/pa2/preserved/outputs/sft/best",
+        "train_examples": 15000,
+        "validation_examples": 1000,
+        "max_length": 512,
+        "batch_size": 1,
+        "accumulation": 32,
+        "learning_rate": 1e-06,
+        "weight_decay": 0.0,
+        "schedule": "constant",
+        "warmup_ratio": 0.0,
+        "clip": 1.0,
+        "epochs": 1,
+        "eval_every": 100,
+        "beta": 0.1,
+        "train_data": "outputs/prepared/uf_train.json",
+        "validation_data": "outputs/prepared/uf_validation.json",
+        "output": "outputs/dpo_uf",
+        "revision": null,
+        "save_every": 10,
+        "max_runtime_seconds": 28800,
+        "source_sha256": "3f0ba60153cfac04503d47b665f31fa69cb8c95e27861b59cf7f7eaa0eda1d77",
+        "data_manifest": {
+          "seed": 42,
+          "model": "Qwen/Qwen2.5-0.5B",
+          "model_revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+          "dataset_revisions": {
+            "HuggingFaceH4/ultrachat_200k": "8049631c405ae6576f93f445c6b8166f76f5505a",
+            "Anthropic/hh-rlhf": "09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa",
+            "HuggingFaceH4/ultrafeedback_binarized": "3949bf5f8c17c394422ccfab0c31ea9c20bdeb85",
+            "tatsu-lab/alpaca_eval": "2edc6fad8be6b14ea7230aabfd08188da6b8b814"
+          },
+          "prompt_template": "### Instruction:\n{instruction}\n\n### Response:\n",
+          "sampling": "seeded streaming shuffle, buffer 10000; first valid unique rows",
+          "max_prompt_tokens": 256,
+          "sft_turns": "first user/assistant exchange",
+          "hh_turns": "single-turn only; equal helpful-base/harmless-base mixture",
+          "files": {
+            "alpaca_eval_300_seed42.json": {
+              "sha256": "6cd4cb0bc1c9c5afa579f2cce7b7cebd71b480e08f3c407f9c0164ca17b8b394",
+              "rows": 300
+            },
+            "hh_eval_300_seed42.json": {
+              "sha256": "295ed7428937a3e8c611bd13c4aa85084d5dc1d7890e2faf057767aa28dd8042",
+              "rows": 300
+            },
+            "hh_train.json": {
+              "sha256": "52f7e0860c56f8b1147e51bb8d19c145165ef03c06d01e93545ed2eab9de3d94",
+              "rows": 15000
+            },
+            "hh_validation.json": {
+              "sha256": "ec7ff0b1a9e0706fc04a5704807bff0b33c7c6583fd14704c987bf67a97545f4",
+              "rows": 1000
+            },
+            "sft_train.json": {
+              "sha256": "d5c33814660b0116691f4361f5c100acacb75c77eb3248a13e111b915eb491ef",
+              "rows": 30000
+            },
+            "sft_validation.json": {
+              "sha256": "92080a2688de5d93875cd27dba88ad2a272286006148955a202642ac2b75c3dc",
+              "rows": 1000
+            },
+            "uf_train.json": {
+              "sha256": "e5c8ad923e9d22ad1aa3a2631d6baad6fb4185252680e8f132e2444d34cfd0c6",
+              "rows": 15000
+            },
+            "uf_validation.json": {
+              "sha256": "aba744884498be7c1e27743d6c78afb02a04e84d3471163be48d5b4e5b9c74d0",
+              "rows": 1000
+            }
+          }
+        },
+        "warm_start": "/kaggle/working/pa2/preserved/outputs/dpo_uf/best",
+        "versions": {
+          "torch": "2.11.0+cu128",
+          "transformers": "4.57.1",
+          "datasets": "4.1.1",
+          "safetensors": "0.8.0"
+        },
+        "sft_reduction": "mean_scored_response_token_nll",
+        "policy_dtype": "float32",
+        "autocast_dtype": "float16",
+        "gpu_names": [
+          "Tesla T4",
+          "Tesla T4"
+        ],
+        "data_hashes": {
+          "train_data": "e5c8ad923e9d22ad1aa3a2631d6baad6fb4185252680e8f132e2444d34cfd0c6",
+          "validation_data": "aba744884498be7c1e27743d6c78afb02a04e84d3471163be48d5b4e5b9c74d0"
+        },
+        "reference_identity": "9f239c2e16083c15ba8b7f6cc99ba56ed51bc70d3f8d1d774238ac709a058bd9"
+      },
+      "complete": {
+        "steps": 469,
+        "best_metric": 0.683,
+        "final": {
+          "loss": 0.6031192556682509,
+          "reward_accuracy": 0.683,
+          "reward_margin": 0.5251753663960844,
+          "chosen_reward": -0.22940084532285981,
+          "rejected_reward": -0.7545762118787971
+        },
+        "elapsed_seconds": 9406.363781929016
+      },
+      "best_step": 469,
+      "skipped_updates": 3,
+      "first_validation": {
+        "elapsed_seconds": 658.3166010379791,
+        "step": 300,
+        "split": "validation",
+        "loss": 0.6076999725229106,
+        "reward_accuracy": 0.668,
+        "reward_margin": 0.45308536758460105,
+        "chosen_reward": -0.119255595389448,
+        "rejected_reward": -0.5723409646892688
+      }
+    },
+    "persona": {
+      "config": {
+        "model": "HuggingFaceTB/SmolLM2-360M-Instruct",
+        "seed": 42,
+        "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+        "data": "data/persona_lora/ramsay_style_preferences.json",
+        "evaluation_prompts": "eval_sets/persona_eval_24_seed42.json",
+        "output": "outputs/persona",
+        "validation_size": 22,
+        "rank": 8,
+        "alpha": 16,
+        "dropout": 0.05,
+        "target_modules": [
+          "q_proj",
+          "v_proj"
+        ],
+        "learning_rate": 5e-05,
+        "batch_size": 2,
+        "accumulation": 8,
+        "epochs": 3,
+        "beta": 0.1,
+        "max_length": 512,
+        "max_prompt_length": 256,
+        "reference": "unadapted base with adapter disabled",
+        "data_sha256": "e1ceb0e49fd25c1adb9fef1862123d9b9d0f82fab8966c9406341117e3675a2a",
+        "train_examples": 198,
+        "validation_examples": 22,
+        "versions": {
+          "trl": "0.24.0",
+          "peft": "0.17.1",
+          "transformers": "4.57.1",
+          "torch": "2.11.0+cu128",
+          "accelerate": "1.14.0"
+        }
+      },
+      "complete": {
+        "training": {
+          "train_runtime": 119.1652,
+          "train_samples_per_second": 4.985,
+          "train_steps_per_second": 0.327,
+          "total_flos": 0.0,
+          "train_loss": 0.6089507799882156,
+          "epoch": 3.0
+        },
+        "final_validation": {
+          "eval_loss": 0.5276986956596375,
+          "eval_runtime": 1.5537,
+          "eval_samples_per_second": 14.16,
+          "eval_steps_per_second": 7.08,
+          "eval_rewards/chosen": 0.3312782645225525,
+          "eval_rewards/rejected": -0.03574156388640404,
+          "eval_rewards/accuracies": 1.0,
+          "eval_rewards/margins": 0.3670198321342468,
+          "eval_logps/chosen": -163.96481323242188,
+          "eval_logps/rejected": -115.8582992553711,
+          "eval_logits/chosen": 0.23305773735046387,
+          "eval_logits/rejected": 0.04215254634618759,
+          "epoch": 3.0
+        },
+        "config": {
+          "model": "HuggingFaceTB/SmolLM2-360M-Instruct",
+          "seed": 42,
+          "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+          "data": "data/persona_lora/ramsay_style_preferences.json",
+          "evaluation_prompts": "eval_sets/persona_eval_24_seed42.json",
+          "output": "outputs/persona",
+          "validation_size": 22,
+          "rank": 8,
+          "alpha": 16,
+          "dropout": 0.05,
+          "target_modules": [
+            "q_proj",
+            "v_proj"
+          ],
+          "learning_rate": 5e-05,
+          "batch_size": 2,
+          "accumulation": 8,
+          "epochs": 3,
+          "beta": 0.1,
+          "max_length": 512,
+          "max_prompt_length": 256,
+          "reference": "unadapted base with adapter disabled",
+          "data_sha256": "e1ceb0e49fd25c1adb9fef1862123d9b9d0f82fab8966c9406341117e3675a2a",
+          "train_examples": 198,
+          "validation_examples": 22,
+          "versions": {
+            "trl": "0.24.0",
+            "peft": "0.17.1",
+            "transformers": "4.57.1",
+            "torch": "2.11.0+cu128",
+            "accelerate": "1.14.0"
+          }
+        },
+        "trainable_parameters": 819200
+      },
+      "best_step": 13,
+      "skipped_updates": 0,
+      "first_validation": {
+        "elapsed_seconds": 4.648228205000009,
+        "step": 0,
+        "split": "validation",
+        "eval_loss": 0.6931473016738892,
+        "eval_runtime": 2.7981,
+        "eval_samples_per_second": 7.862,
+        "eval_steps_per_second": 3.931,
+        "eval_rewards/chosen": 0.0,
+        "eval_rewards/rejected": 0.0,
+        "eval_rewards/accuracies": 0.0,
+        "eval_rewards/margins": 0.0,
+        "eval_logps/chosen": -167.27757263183594,
+        "eval_logps/rejected": -115.50088500976562,
+        "eval_logits/chosen": 0.2123299539089203,
+        "eval_logits/rejected": -0.07518791407346725,
+        "epoch": 0
+      }
+    }
+  },
+  "manual": "docs/assignment_manual.pdf",
+  "manual_pages": 24,
+  "deviations": [
+    "UF timed out at step 405; recovered best step-300 weights with Adam/RNG reset, then completed steps 301-469. Original frozen SFT reference retained."
+  ],
+  "metadata_audit_passed": true,
+  "remaining": [
+    "complete model backup verification",
+    "2-5 generation sanity examples per model",
+    "full fixed-subset generation",
+    "blinded Kaggle judging",
+    "report and final package"
+  ]
+}

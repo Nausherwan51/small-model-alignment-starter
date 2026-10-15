@@ -15,7 +15,11 @@ by `scripts/prepare_kaggle.py`; it excludes credentials and model caches. GPU
 execution is authorized by the user but experimental results must be checked
 from saved outputs. Persona LoRA-DPO, resumable generation, blinded comparisons
 and Kaggle judging code are described in `docs/persona_and_evaluation.md`.
-Persona GPU execution and end-to-end evaluation/report preparation are pending.
+All four training tracks are complete. Saved evidence and plots are under
+`submission/27100384/`; generation evaluation and the final report are in progress.
+UF completed in a separate recovery job from step-300 weights with optimizer/RNG
+reset, after the original serial job timed out at step 405. This is not exact
+continuation. See `submission/27100384/training_audit.json` for actual metrics.
 
 The original starter provided the environment metadata, assignment PDF, fixed
 evaluation/data files, and adapter scaffold described below. This fork adds the

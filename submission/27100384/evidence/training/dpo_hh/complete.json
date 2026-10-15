@@ -1,0 +1,12 @@
+{
+  "steps": 469,
+  "best_metric": 0.667,
+  "final": {
+    "loss": 0.6148117113038898,
+    "reward_accuracy": 0.667,
+    "reward_margin": 0.2866382718961686,
+    "chosen_reward": -0.25176513847673776,
+    "rejected_reward": -0.5384034102700752
+  },
+  "elapsed_seconds": 13059.451466321945
+}

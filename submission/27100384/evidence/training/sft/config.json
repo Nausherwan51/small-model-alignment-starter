@@ -1,0 +1,86 @@
+{
+  "task": "sft",
+  "seed": 42,
+  "model": "Qwen/Qwen2.5-0.5B",
+  "train_examples": 30000,
+  "validation_examples": 1000,
+  "max_length": 512,
+  "batch_size": 2,
+  "accumulation": 16,
+  "learning_rate": 2e-05,
+  "weight_decay": 0.1,
+  "schedule": "cosine",
+  "warmup_ratio": 0.03,
+  "clip": 1.0,
+  "epochs": 1,
+  "eval_every": 200,
+  "beta": 0.1,
+  "train_data": "outputs/prepared/sft_train.json",
+  "validation_data": "outputs/prepared/sft_validation.json",
+  "output": "outputs/sft",
+  "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+  "source_sha256": "4de54e09cd9bb479716d4d3b70a2f6128723bc8f6dabcb4ae68366310a0ebdbc",
+  "data_manifest": {
+    "seed": 42,
+    "model": "Qwen/Qwen2.5-0.5B",
+    "model_revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "dataset_revisions": {
+      "HuggingFaceH4/ultrachat_200k": "8049631c405ae6576f93f445c6b8166f76f5505a",
+      "Anthropic/hh-rlhf": "09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa",
+      "HuggingFaceH4/ultrafeedback_binarized": "3949bf5f8c17c394422ccfab0c31ea9c20bdeb85",
+      "tatsu-lab/alpaca_eval": "2edc6fad8be6b14ea7230aabfd08188da6b8b814"
+    },
+    "prompt_template": "### Instruction:\n{instruction}\n\n### Response:\n",
+    "sampling": "seeded streaming shuffle, buffer 10000; first valid unique rows",
+    "max_prompt_tokens": 256,
+    "sft_turns": "first user/assistant exchange",
+    "hh_turns": "single-turn only; equal helpful-base/harmless-base mixture",
+    "files": {
+      "alpaca_eval_300_seed42.json": {
+        "sha256": "6cd4cb0bc1c9c5afa579f2cce7b7cebd71b480e08f3c407f9c0164ca17b8b394",
+        "rows": 300
+      },
+      "hh_eval_300_seed42.json": {
+        "sha256": "295ed7428937a3e8c611bd13c4aa85084d5dc1d7890e2faf057767aa28dd8042",
+        "rows": 300
+      },
+      "hh_train.json": {
+        "sha256": "52f7e0860c56f8b1147e51bb8d19c145165ef03c06d01e93545ed2eab9de3d94",
+        "rows": 15000
+      },
+      "hh_validation.json": {
+        "sha256": "ec7ff0b1a9e0706fc04a5704807bff0b33c7c6583fd14704c987bf67a97545f4",
+        "rows": 1000
+      },
+      "sft_train.json": {
+        "sha256": "d5c33814660b0116691f4361f5c100acacb75c77eb3248a13e111b915eb491ef",
+        "rows": 30000
+      },
+      "sft_validation.json": {
+        "sha256": "92080a2688de5d93875cd27dba88ad2a272286006148955a202642ac2b75c3dc",
+        "rows": 1000
+      },
+      "uf_train.json": {
+        "sha256": "e5c8ad923e9d22ad1aa3a2631d6baad6fb4185252680e8f132e2444d34cfd0c6",
+        "rows": 15000
+      },
+      "uf_validation.json": {
+        "sha256": "aba744884498be7c1e27743d6c78afb02a04e84d3471163be48d5b4e5b9c74d0",
+        "rows": 1000
+      }
+    }
+  },
+  "versions": {
+    "torch": "2.11.0+cu128",
+    "transformers": "4.57.1",
+    "datasets": "4.1.1",
+    "safetensors": "0.8.0"
+  },
+  "sft_reduction": "mean_scored_response_token_nll",
+  "policy_dtype": "float32",
+  "autocast_dtype": "float16",
+  "gpu_names": [
+    "Tesla T4",
+    "Tesla T4"
+  ]
+}

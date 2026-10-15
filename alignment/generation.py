@@ -23,6 +23,14 @@ def render_prompt(tokenizer, instruction, prompt_format):
     raise ValueError("Unsupported prompt format")
 
 
+def truncate_prompt(tokens, limit):
+    """Retain the instruction opening and the response/chat boundary at the end."""
+    if len(tokens) <= limit:
+        return tokens
+    tail = min(32, limit // 4)
+    return tokens[:limit-tail] + tokens[-tail:] if tail else tokens[:limit]
+
+
 def generate_saved(model, tokenizer, prompts, output, generator, settings, prompt_format,
                     checkpoint_identity, *, sanity_only=False, sanity_approved=False):
     import torch
@@ -37,7 +45,7 @@ def generate_saved(model, tokenizer, prompts, output, generator, settings, promp
     spec = {"checkpoint": checkpoint_identity, "generator": generator, "settings": settings,
             "prompt_format": prompt_format, "prompts_sha256": digest(prompts),
             "chat_template": tokenizer.chat_template if prompt_format == "chat" else None,
-            "prompt_truncation": "keep last max_prompt_length tokens"}
+            "prompt_truncation": "head plus last min(32, max_prompt_length//4) tokens"}
     fingerprint = digest(spec)
     meta_path = output.with_suffix(".meta.json")
     if meta_path.exists() and json.loads(meta_path.read_text(encoding="utf-8"))["fingerprint"] != fingerprint:
@@ -66,7 +74,7 @@ def generate_saved(model, tokenizer, prompts, output, generator, settings, promp
         if prompt["id"] in completed:
             continue
         text = render_prompt(tokenizer, prompt["instruction"], prompt_format)
-        tokens = tokenizer.encode(text, add_special_tokens=False)[-settings["max_prompt_length"]:]
+        tokens = truncate_prompt(tokenizer.encode(text, add_special_tokens=False), settings["max_prompt_length"])
         if not tokens:
             raise ValueError("Rendered prompt has no tokens")
         inputs = torch.tensor([tokens], dtype=torch.long, device=device)
@@ -79,7 +87,9 @@ def generate_saved(model, tokenizer, prompts, output, generator, settings, promp
         completed[prompt["id"]] = {"id": prompt["id"], "instruction": prompt["instruction"],
             "output": output_text, "generator": generator, "dataset": prompt.get("dataset", "persona"),
             "category": prompt.get("category", "unspecified"), "generation_settings": settings,
-            "prompt_format": prompt_format, "fingerprint": fingerprint}
+            "prompt_format": prompt_format, "fingerprint": fingerprint,
+            "input_tokens": len(tokens), "generated_tokens": result.shape[1] - inputs.shape[1],
+            "ended_with_eos": int(result[0, -1]) == tokenizer.eos_token_id}
         write_jsonl(output, [completed[p["id"]] for p in prompts if p["id"] in completed])
     return [completed[p["id"]] for p in selected]
 

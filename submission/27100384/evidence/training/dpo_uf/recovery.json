@@ -1,0 +1,9 @@
+{
+  "mode": "legacy_weights_only",
+  "source": "/kaggle/working/pa2/preserved/outputs/dpo_uf/best",
+  "recovered_step": 300,
+  "optimizer_reset": true,
+  "rng_reset": true,
+  "data_order": "v1 pilot and seeded shuffle reproduced; consumed windows skipped",
+  "reference": "/kaggle/working/pa2/preserved/outputs/sft/best"
+}

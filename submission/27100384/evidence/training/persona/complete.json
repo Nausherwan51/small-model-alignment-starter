@@ -1,0 +1,60 @@
+{
+  "training": {
+    "train_runtime": 119.1652,
+    "train_samples_per_second": 4.985,
+    "train_steps_per_second": 0.327,
+    "total_flos": 0.0,
+    "train_loss": 0.6089507799882156,
+    "epoch": 3.0
+  },
+  "final_validation": {
+    "eval_loss": 0.5276986956596375,
+    "eval_runtime": 1.5537,
+    "eval_samples_per_second": 14.16,
+    "eval_steps_per_second": 7.08,
+    "eval_rewards/chosen": 0.3312782645225525,
+    "eval_rewards/rejected": -0.03574156388640404,
+    "eval_rewards/accuracies": 1.0,
+    "eval_rewards/margins": 0.3670198321342468,
+    "eval_logps/chosen": -163.96481323242188,
+    "eval_logps/rejected": -115.8582992553711,
+    "eval_logits/chosen": 0.23305773735046387,
+    "eval_logits/rejected": 0.04215254634618759,
+    "epoch": 3.0
+  },
+  "config": {
+    "model": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "seed": 42,
+    "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+    "data": "data/persona_lora/ramsay_style_preferences.json",
+    "evaluation_prompts": "eval_sets/persona_eval_24_seed42.json",
+    "output": "outputs/persona",
+    "validation_size": 22,
+    "rank": 8,
+    "alpha": 16,
+    "dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "v_proj"
+    ],
+    "learning_rate": 5e-05,
+    "batch_size": 2,
+    "accumulation": 8,
+    "epochs": 3,
+    "beta": 0.1,
+    "max_length": 512,
+    "max_prompt_length": 256,
+    "reference": "unadapted base with adapter disabled",
+    "data_sha256": "e1ceb0e49fd25c1adb9fef1862123d9b9d0f82fab8966c9406341117e3675a2a",
+    "train_examples": 198,
+    "validation_examples": 22,
+    "versions": {
+      "trl": "0.24.0",
+      "peft": "0.17.1",
+      "transformers": "4.57.1",
+      "torch": "2.11.0+cu128",
+      "accelerate": "1.14.0"
+    }
+  },
+  "trainable_parameters": 819200
+}
