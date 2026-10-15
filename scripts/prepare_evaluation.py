@@ -53,7 +53,7 @@ def main():
     (upload / "evaluation_bundle.json").write_text(json.dumps(manifest, indent=2))
     (evaluation / "evaluation_bundle.json").write_text(json.dumps(manifest, indent=2))
     (upload / "dataset-metadata.json").write_text(json.dumps({"id":"nausherwan123/pa2-evaluation-pairs-27100384",
-        "title":"PA2 Saved Evaluation Pairs 27100384","licenses":[{"name":"other"}],
+        "title":"PA2 Saved Evaluation Pairs 27100384","isPrivate":True,"licenses":[{"name":"other"}],
         "description":"Private saved blinded pairs, hidden identity maps and original evaluator source. No credentials or model weights."}))
     print(json.dumps({"pairs":manifest["expected_pairs"],"dataset":str(upload)}))
 

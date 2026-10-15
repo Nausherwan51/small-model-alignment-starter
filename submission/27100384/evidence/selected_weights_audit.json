@@ -1,0 +1,31 @@
+{
+  "sft": {
+    "finite": true,
+    "stored_parameters": 494032768,
+    "dtypes": [
+      "float32"
+    ]
+  },
+  "hh": {
+    "finite": true,
+    "stored_parameters": 494032768,
+    "dtypes": [
+      "float32"
+    ]
+  },
+  "uf": {
+    "finite": true,
+    "stored_parameters": 494032768,
+    "dtypes": [
+      "float32"
+    ]
+  },
+  "persona": {
+    "finite": true,
+    "stored_parameters": 819200,
+    "dtypes": [
+      "float32"
+    ],
+    "nonzero_lora_B_elements": 327680
+  }
+}

@@ -17,12 +17,13 @@ def smoothed(values, window=20):
 
 
 def main():
-    plt.rcParams.update({"font.size": 10, "axes.spines.top": False, "axes.spines.right": False})
+    plt.rcParams.update({"font.size": 9, "axes.spines.top": False, "axes.spines.right": False})
     destination = ROOT / "submission/27100384/plots"
     destination.mkdir(parents=True, exist_ok=True)
     for track, title in (("sft", "Supervised fine-tuning"), ("dpo_hh", "HH-RLHF DPO"), ("dpo_uf", "UltraFeedback DPO"), ("persona", "Persona LoRA-DPO")):
         records = rows(ROOT / f"submission/27100384/evidence/training/{track}/metrics.jsonl")
-        fig, ax = plt.subplots(figsize=(7, 3.0), layout="constrained")
+        fig, ax = plt.subplots(figsize=(7, 3.5))
+        fig.subplots_adjust(left=.11, right=.86, bottom=.31, top=.89)
         if track == "dpo_uf":
             old = rows(ROOT / "outputs/downloads/main/pa2/outputs/dpo_uf/metrics.jsonl")
             discarded = [r for r in old if r.get("split") == "train" and r["step"] > 300]
@@ -46,9 +47,9 @@ def main():
             axis.set_ylim(0, 1.04)
             handles, labels = ax.get_legend_handles_labels()
             h, l = axis.get_legend_handles_labels()
-            ax.legend(handles+h, labels+l, fontsize=7, loc="best")
+            fig.legend(handles+h, labels+l, fontsize=7, loc="lower center", ncol=2, frameon=False)
         else:
-            ax.legend(fontsize=8)
+            fig.legend(*ax.get_legend_handles_labels(), fontsize=7, loc="lower center", ncol=2, frameon=False)
         fig.savefig(destination / f"{track}.png", dpi=240)
         plt.close(fig)
     print(str(destination))

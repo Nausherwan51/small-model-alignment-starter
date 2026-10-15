@@ -40,8 +40,10 @@ def main():
                "hh": json.loads((root / "outputs/prepared/hh_eval_300_seed42.json").read_text(encoding="utf-8")),
                "persona": json.loads((root / "eval_sets/persona_eval_24_seed42.json").read_text(encoding="utf-8"))}
     (data / "evaluation_prompts.json").write_text(json.dumps(prompts, ensure_ascii=False), encoding="utf-8")
-    dataset_id = f"nausherwan123/pa2-gen-{args.phase.replace('_','-')}-27100384"
-    (data / "dataset-metadata.json").write_text(json.dumps({"id": dataset_id, "title": f"PA2 Gen {args.phase} 27100384",
+    dataset_id = ("nausherwan123/pa2-generation-private-inputs-27100384" if args.phase == "full"
+                  else f"nausherwan123/pa2-gen-{args.phase.replace('_','-')}-27100384")
+    title = "PA2 Generation Private Inputs 27100384" if args.phase == "full" else f"PA2 Gen {args.phase} 27100384"
+    (data / "dataset-metadata.json").write_text(json.dumps({"id": dataset_id, "title": title, "isPrivate": True,
         "licenses": [{"name": "other"}], "description": "Private reproducible source and fixed evaluation prompts. Upstream data licenses apply."}))
     sources = ["nausherwan123/pa2-uf-recovery-20261015", "nausherwan123/pa2-persona-lora-dpo-20261015"]
     datasets = [dataset_id, "nausherwan123/pa2-recovery-checkpoints-20261015"]

@@ -1,0 +1,27 @@
+{
+  "format_version": 1,
+  "position": {
+    "epoch": 1,
+    "window": 0,
+    "step": 469,
+    "elapsed_seconds": 9367.593197345734
+  },
+  "restart_components": [
+    "format_version",
+    "signature",
+    "config",
+    "position",
+    "best",
+    "rng",
+    "model",
+    "optimizer",
+    "scheduler",
+    "scaler"
+  ],
+  "optimizer_state_entries": 290,
+  "rng_components": [
+    "python",
+    "torch",
+    "cuda"
+  ]
+}

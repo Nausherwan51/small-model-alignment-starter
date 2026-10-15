@@ -1,0 +1,122 @@
+{
+  "kernel": "nausherwan123/pa2-uf-recovery-20261015",
+  "files": {
+    "pa2/outputs/dpo_uf/best/added_tokens.json": {
+      "bytes": 605,
+      "sha256": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b"
+    },
+    "pa2/outputs/dpo_uf/best/chat_template.jinja": {
+      "bytes": 2427,
+      "sha256": "44d5f08f3f72b837eaad09f13a54c1f9f4eb58d75240334548b7fd52a5437fa5"
+    },
+    "pa2/outputs/dpo_uf/best/config.json": {
+      "bytes": 1249,
+      "sha256": "428405fd2d0f3b959ae99dfa0e91b0118d74f153020f026497c65c5b7fe0ea45"
+    },
+    "pa2/outputs/dpo_uf/best/generation_config.json": {
+      "bytes": 117,
+      "sha256": "ce8f331663b06a8432e8531185822a55f95cc92cde3ff9518e05e0c73d6918d3"
+    },
+    "pa2/outputs/dpo_uf/best/merges.txt": {
+      "bytes": 1671853,
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    "pa2/outputs/dpo_uf/best/special_tokens_map.json": {
+      "bytes": 616,
+      "sha256": "6676f091c8bc4d1b50146427cfde92073402866b87b6e39223227931b70083e9"
+    },
+    "pa2/outputs/dpo_uf/best/tokenizer.json": {
+      "bytes": 11421896,
+      "sha256": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa"
+    },
+    "pa2/outputs/dpo_uf/best/tokenizer_config.json": {
+      "bytes": 4689,
+      "sha256": "60f6e7bc948cedd377a20f01d022ef664d026fbc93d72e0a9bdac233f8632181"
+    },
+    "pa2/outputs/dpo_uf/best/training_metadata.json": {
+      "bytes": 3767,
+      "sha256": "d35df2cf7bd958d444ea6b043b331ab6b1693be1232d15b02608820748d54765"
+    },
+    "pa2/outputs/dpo_uf/best/vocab.json": {
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "pa2/outputs/dpo_uf/complete.json": {
+      "bytes": 289,
+      "sha256": "37fbe67198cf44e5b823397a10c6e7c69110ee4f00a3ae9054694a5b27e5d8c4"
+    },
+    "pa2/outputs/dpo_uf/config.json": {
+      "bytes": 3338,
+      "sha256": "de25fdfc2eaccadeb99c1e2598ffc2bef65425a538c59bbb6c59c2e7ab4552e4"
+    },
+    "pa2/outputs/dpo_uf/final/added_tokens.json": {
+      "bytes": 605,
+      "sha256": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b"
+    },
+    "pa2/outputs/dpo_uf/final/chat_template.jinja": {
+      "bytes": 2427,
+      "sha256": "44d5f08f3f72b837eaad09f13a54c1f9f4eb58d75240334548b7fd52a5437fa5"
+    },
+    "pa2/outputs/dpo_uf/final/config.json": {
+      "bytes": 1249,
+      "sha256": "428405fd2d0f3b959ae99dfa0e91b0118d74f153020f026497c65c5b7fe0ea45"
+    },
+    "pa2/outputs/dpo_uf/final/generation_config.json": {
+      "bytes": 117,
+      "sha256": "ce8f331663b06a8432e8531185822a55f95cc92cde3ff9518e05e0c73d6918d3"
+    },
+    "pa2/outputs/dpo_uf/final/merges.txt": {
+      "bytes": 1671853,
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    "pa2/outputs/dpo_uf/final/special_tokens_map.json": {
+      "bytes": 616,
+      "sha256": "6676f091c8bc4d1b50146427cfde92073402866b87b6e39223227931b70083e9"
+    },
+    "pa2/outputs/dpo_uf/final/tokenizer.json": {
+      "bytes": 11421896,
+      "sha256": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa"
+    },
+    "pa2/outputs/dpo_uf/final/tokenizer_config.json": {
+      "bytes": 4689,
+      "sha256": "60f6e7bc948cedd377a20f01d022ef664d026fbc93d72e0a9bdac233f8632181"
+    },
+    "pa2/outputs/dpo_uf/final/training_metadata.json": {
+      "bytes": 3767,
+      "sha256": "d35df2cf7bd958d444ea6b043b331ab6b1693be1232d15b02608820748d54765"
+    },
+    "pa2/outputs/dpo_uf/final/vocab.json": {
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "pa2/outputs/dpo_uf/latest.pt": {
+      "bytes": 5928768464,
+      "sha256": "fc205f9a8b6716e96ea8d8dc231a7f941bdee830cb30a61e999b4f34bccc5b8d"
+    },
+    "pa2/outputs/dpo_uf/metrics.jsonl": {
+      "bytes": 54407,
+      "sha256": "9f3a81d9a92794ce9693b181607ad5e63314c07f8759bca077347623045b7d5d"
+    },
+    "pa2/outputs/dpo_uf/original_config.json": {
+      "bytes": 2895,
+      "sha256": "b015f2a7445222c0aeb7aacee2ad56712e708315319e7ee26c4365c02a255b86"
+    },
+    "pa2/outputs/dpo_uf/original_metrics.jsonl": {
+      "bytes": 129890,
+      "sha256": "cd9b5480fd69cb89da8eeb30ab9a5a2c3166e65eba112660d9edbf1084a10923"
+    },
+    "pa2/outputs/dpo_uf/recovery.json": {
+      "bytes": 322,
+      "sha256": "7e1583ddb99f547759c6c72fdf4ad7d9fe080f8d73baa0befdb9e89dd9551e8d"
+    },
+    "pa2/outputs/dpo_uf/best/model.safetensors": {
+      "bytes": 1976163472,
+      "sha256": "b8dff28cea32fee9da951ab33f7f57392942da171d961caee7613884ce364c09"
+    },
+    "pa2/outputs/dpo_uf/final/model.safetensors": {
+      "bytes": 1976163472,
+      "sha256": "b8dff28cea32fee9da951ab33f7f57392942da171d961caee7613884ce364c09"
+    }
+  },
+  "verified": true
+}

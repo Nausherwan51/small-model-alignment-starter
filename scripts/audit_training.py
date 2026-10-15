@@ -53,6 +53,15 @@ def main():
                     "best_step": best["step"] if best else None,
                     "skipped_updates": sum(r.get("skipped_update", False) for r in metrics),
                     "first_validation": next((r for r in metrics if r.get("split") == "validation"), None)}
+        if track == "dpo_uf":
+            old = [json.loads(s) for s in (copied / "original_metrics.jsonl").read_text().splitlines() if s.strip()]
+            retained = sum(r.get("skipped_update", False) for r in old if r.get("step", 999) <= 300)
+            skipped = retained + report["tracks"][track]["skipped_updates"]
+            report["tracks"][track].update(retained_trajectory_skipped_updates=skipped,
+                    retained_trajectory_applied_updates=complete["steps"]-skipped,
+                    recovery_segment_skipped_updates=report["tracks"][track]["skipped_updates"])
+        if track == "dpo_hh":
+            report["tracks"][track]["applied_updates"] = complete["steps"] - report["tracks"][track]["skipped_updates"]
     prepared = ROOT / "outputs/prepared"
     for track, prefix in (("sft", "sft"), ("dpo_hh", "hh"), ("dpo_uf", "uf")):
         train = json.loads((prepared / f"{prefix}_train.json").read_text(encoding="utf-8"))

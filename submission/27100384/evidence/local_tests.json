@@ -1,6 +1,6 @@
 {
-  "suite": "PA2_TEST_PERSONA=1 python -m pytest -q tests --tb=short",
-  "observed": "61 passed and 1 Windows hardlink sandbox failure; all 4 recovery input tests passed on authorized filesystem rerun",
-  "evaluation_tests": "9 passed including complete-task-opening truncation regression test",
-  "note": "No GPU training rerun was performed"
+  "suite": "PA2_TEST_PERSONA=1 python -m pytest -q tests --tb=short --basetemp outputs/test_tmp_all_authorized_20261016",
+  "result": "62 passed, 1 benign PEFT warning",
+  "seconds": 76.84,
+  "filesystem_access": "authorized Windows hardlink access for recovery-input test"
 }

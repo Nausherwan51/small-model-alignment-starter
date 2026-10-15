@@ -50,7 +50,7 @@ def main():
             ("LINEBELOW",(0,1),(-1,-1),.25,colors.HexColor("#d5dfe7"))]))
         story.append(tab); story.append(Spacer(1,9))
     def figure(track):
-        story.append(Image(str(BUNDLE / f"plots/{track}.png"), width=WIDTH, height=WIDTH*3/7))
+        story.append(Image(str(BUNDLE / f"plots/{track}.png"), width=WIDTH, height=WIDTH*3.5/7))
         story.append(Spacer(1,7))
     def para_list(key):
         for text in analysis.get(key, []): p(escape(text))

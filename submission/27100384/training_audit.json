@@ -216,7 +216,8 @@
         "reward_margin": -0.00011326404493593145,
         "chosen_reward": 0.00033362193493826454,
         "rejected_reward": 0.0004468859819405679
-      }
+      },
+      "applied_updates": 466
     },
     "dpo_uf": {
       "config": {
@@ -336,7 +337,10 @@
         "reward_margin": 0.45308536758460105,
         "chosen_reward": -0.119255595389448,
         "rejected_reward": -0.5723409646892688
-      }
+      },
+      "retained_trajectory_skipped_updates": 6,
+      "retained_trajectory_applied_updates": 463,
+      "recovery_segment_skipped_updates": 3
     },
     "persona": {
       "config": {
