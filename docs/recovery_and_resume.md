@@ -46,6 +46,15 @@ data read-only. It checks stage completion, source/data hashes, T4 x2 and tests
 before any training, preserves CUDA torch, and runs only UF.
 The original job, its source dataset, SFT and HH checkpoints are not changed.
 
+The local one-time continuation `scripts/launch_uf_recovery_when_ready.py` waits
+for the in-progress private checkpoint dataset upload to become ready, validates
+the passing-test/authorization record, source archive hash and verified original
+backup, and submits exactly one later recovery version. A retained exclusive
+lock prevents duplicate launches. It records submission or failure in
+`outputs/uf_recovery_launch_record.json`. The existing heartbeat observes that
+record and then the new GPU job; it does not submit jobs itself. Keep the local
+computer awake through upload and submission. Kaggle training then runs remotely.
+
 ## Full restart format
 
 `outputs/<track>/latest.pt` is an atomic PyTorch bundle containing policy weights,
