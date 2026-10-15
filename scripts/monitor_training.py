@@ -11,7 +11,14 @@ import time
 from datetime import datetime, timezone
 
 
-def check(kernel, state_path, seconds=12):
+def progress_key(progress):
+    stage, step, split = progress or [None, None, None]
+    return ({"sft": 0, "dpo_hh": 1, "dpo_uf": 2, "persona": 0}.get(stage, -1),
+            step if isinstance(step, (int, float)) else -1,
+            {"pilot": 0, "train": 1, "validation": 2}.get(split, -1))
+
+
+def check(kernel, state_path, seconds=50):
     from kaggle.api.kaggle_api_extended import KaggleApi
     api = KaggleApi()
     api.authenticate()
@@ -33,6 +40,8 @@ def check(kernel, state_path, seconds=12):
     threading.Thread(target=read, daemon=True).start()
     end = time.monotonic() + seconds
     latest, stage = None, None
+    state_path.parent.mkdir(parents=True, exist_ok=True)
+    transcript = state_path.with_suffix(".stream.log").open("w", encoding="utf-8")
     try:
         while time.monotonic() < end:
             try:
@@ -41,6 +50,7 @@ def check(kernel, state_path, seconds=12):
                 if process.poll() is not None:
                     break
                 continue
+            transcript.write(line)
             if "RUN " in line and "alignment.training" in line:
                 stage = line.split("configs/")[-1].split("_resolved")[0]
             elif "RUN " in line and "alignment.persona" in line:
@@ -52,6 +62,7 @@ def check(kernel, state_path, seconds=12):
             except ValueError:
                 pass
     finally:
+        transcript.close()
         if process.poll() is None:
             process.terminate()
         process.wait(timeout=5)
@@ -60,6 +71,12 @@ def check(kernel, state_path, seconds=12):
     progress = [stage, latest.get("step") if latest else None, latest.get("split") if latest else None]
     if latest is None:
         progress = previous.get("progress", progress)
+    # The live endpoint replays its entire history on each connection. A bounded
+    # read can finish before catching up; never interpret older logs as progress.
+    if progress_key(progress) < progress_key(previous.get("progress")):
+        record["replay_behind_previous"] = True
+        progress = previous["progress"]
+        record.update(stage=previous.get("stage"), latest_metric=previous.get("latest_metric"))
     record["logs_available"] = latest is not None
     record["progress"] = progress
     record["last_progress_at"] = now if previous.get("progress") != progress else previous.get("last_progress_at", now)

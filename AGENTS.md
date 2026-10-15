@@ -80,3 +80,10 @@ against all 24 pages of `docs/assignment_manual.pdf` (sections 3-17).
   is https://github.com/Nausherwan51/small-model-alignment-starter.git immediately
   before pushing. Do not push to the course upstream or create a codex/ branch.
 - Record verified observations separately from proposed choices and future work.
+- On 2026-10-15 the user authorized preserving completed checkpoints, recovering
+  timed-out UltraFeedback in a separate GPU job, and implementing full resume.
+  Preserve the original job/version. Recovery from its legacy weights must
+  explicitly disclose the optimizer/RNG reset; never claim exact continuation.
+  Future main-track runs must save atomic full training state at update boundaries
+  independently of best-model selection, reproduce data order, validate matching
+  data/reference/config, and stop with a saved restart before the session budget.

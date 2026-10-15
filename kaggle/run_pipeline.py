@@ -95,6 +95,9 @@ def main():
         config_path.write_text(json.dumps(config, indent=2))
         started = time.time()
         command([sys.executable, "-u", "-m", "alignment.training", "--config", config_path])
+        if not (ROOT / "outputs" / track / "complete.json").exists():
+            print("STAGE_PAUSED", track, "preserve latest.pt and resume in a separate job", flush=True)
+            return
         print("STAGE_COMPLETE", track, time.time() - started, flush=True)
         # Each stage writes best/final checkpoints and a completion marker.
         # Kaggle saves outputs when this submitted batch version completes.
