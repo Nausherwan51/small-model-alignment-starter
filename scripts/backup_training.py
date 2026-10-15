@@ -102,10 +102,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--kernel", default="nausherwan123/pa2-sft-dpo-20261015")
     parser.add_argument("--output", default="outputs/backups/main")
+    parser.add_argument("--verify-only", action="store_true", help="Verify all listed artifacts already downloaded locally")
     parser.add_argument("--required-tracks", nargs="*", default=["sft", "dpo_hh"],
                         help="Tracks whose complete/best/final artifacts must exist; empty permits paused runs")
     args = parser.parse_args()
-    root = Path(args.output)
+    root = Path(args.output).resolve()
     root.mkdir(parents=True, exist_ok=True)
     api = KaggleApi()
     api.authenticate()
@@ -135,8 +136,15 @@ def main():
         raise RuntimeError("Session output not available yet; no backup claimed")
     # Three streams bound memory and allow small metadata to proceed alongside weights.
     items.sort(key=lambda item: item.file_name.endswith(".safetensors"))
-    with ThreadPoolExecutor(max_workers=3) as pool:
-        paths = list(pool.map(lambda item: download(item, root), items))
+    if args.verify_only:
+        paths = [(root / item.file_name).resolve() for item in items]
+        for path in paths:
+            if not path.is_relative_to(root) or not path.is_file():
+                raise ValueError("Missing or unsafe artifact in local backup")
+            verify_file(path, path.suffix)
+    else:
+        with ThreadPoolExecutor(max_workers=3) as pool:
+            paths = list(pool.map(lambda item: download(item, root), items))
     records = {}
     for path in paths:
         digest = hashlib.sha256()
