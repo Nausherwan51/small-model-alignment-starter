@@ -38,8 +38,12 @@ def main():
         "id": kernel_id, "title": "PA2 UF Recovery 20261015", "code_file": "run_uf_recovery.py",
         "language": "python", "kernel_type": "script", "is_private": True,
         "enable_gpu": True, "enable_internet": True, "machine_shape": "NvidiaTeslaT4",
-        "dataset_sources": [original["kaggle_dataset"], dataset_id],
-        "kernel_sources": [original["kaggle_kernel"] + "/" + str(original["kaggle_version"])],
+        "dataset_sources": [original["kaggle_dataset"], dataset_id,
+                            "nausherwan123/pa2-recovery-checkpoints-20261015"],
+        # Timed-out session artifacts are downloadable but cannot be notebook
+        # inputs. The independently verified private checkpoint dataset replaces
+        # that unavailable mount; retain original job/version in provenance.
+        "kernel_sources": [],
         "competition_sources": [], "model_sources": []
     }, indent=2))
     print(json.dumps({"dataset": str(dataset), "kernel": str(kernel), "kernel_id": kernel_id,

@@ -33,6 +33,25 @@ def unique(paths, label):
     return paths[0]
 
 
+def mount_checkpoints(manifest_path, provenance, destination):
+    manifest = json.loads(manifest_path.read_text())
+    if manifest["original_source_sha256"] != provenance["original_source_sha256"]:
+        raise ValueError("Checkpoint dataset original source mismatch")
+    for name, info in manifest["files"].items():
+        target = destination / name
+        uploaded = manifest_path.parent / info["uploaded_name"]
+        if not target.resolve().is_relative_to(destination.resolve()) or uploaded.parent != manifest_path.parent:
+            raise ValueError("Unsafe checkpoint manifest path")
+        digest = hashlib.sha256()
+        with uploaded.open("rb") as handle:
+            while chunk := handle.read(8 * 1024 * 1024):
+                digest.update(chunk)
+        if uploaded.stat().st_size != info["bytes"] or digest.hexdigest() != info["sha256"]:
+            raise ValueError(f"Checkpoint dataset integrity mismatch: {name}")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.symlink_to(uploaded)
+
+
 def main():
     ROOT.mkdir(parents=True, exist_ok=True)
     inputs = Path("/kaggle/input")
@@ -64,7 +83,9 @@ def main():
     for name, info in manifest["files"].items():
         if hashlib.sha256((prepared / name).read_bytes()).hexdigest() != info["sha256"]:
             raise ValueError(f"Prepared data mismatch: {name}")
-    sft_meta = unique((p for p in inputs.rglob("training_metadata.json")
+    preserved = ROOT / "preserved"
+    mount_checkpoints(unique(inputs.rglob("checkpoint_manifest.json"), "checkpoint manifest"), provenance, preserved)
+    sft_meta = unique((p for p in preserved.rglob("training_metadata.json")
                        if p.parent.as_posix().endswith("/outputs/sft/best")), "original SFT best")
     old_outputs = sft_meta.parents[2]
     for stage in ("sft", "dpo_hh"):

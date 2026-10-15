@@ -31,8 +31,18 @@ printed or persisted. The original private notebook/version is also retained.
 
 Prepare with `python scripts/prepare_uf_recovery.py`. Upload its private source
 dataset, then launch the new `nausherwan123/pa2-uf-recovery-20261015` notebook.
-It mounts original version-1 outputs and original prepared data read-only. It
-checks stage completion, source/data hashes, T4 x2 allocation and local tests
+Kaggle rejected the timed-out notebook as an input with and without a version
+suffix; the first two recovery versions stopped during input preflight before
+training. The fallback is a new private dataset,
+`nausherwan123/pa2-recovery-checkpoints-20261015`, built by
+`scripts/prepare_recovery_checkpoints.py` from downloaded, structurally verified
+SFT best and UF step-300 best weights. Flat uploads avoid archive expansion
+ambiguity; local hardlinks avoid another four GB of copies. A manifest records
+file sizes, SHA-256 hashes and original source identity. The runtime verifies
+every file and reconstructs paths with symlinks to read-only input files.
+
+The recovery mounts this private checkpoint dataset and the original prepared
+data read-only. It checks stage completion, source/data hashes, T4 x2 and tests
 before any training, preserves CUDA torch, and runs only UF.
 The original job, its source dataset, SFT and HH checkpoints are not changed.
 
