@@ -103,18 +103,15 @@ records as evidence. Summarize dangerous content without actionable quotations.
 Explicitly answer which model did better, by how much, and plausible reasons
 connected to training diagnostics/data. Do not invent absent improvements.
 
-PDF skill was read and its artifact marker was successfully run exactly once
-before authoring scripts/build_report.py. outputs/evaluation_execution.json records
-this; do not rerun that marker for the same report operation. No PDF has yet been
-created. Use bundled Python containing ReportLab:
+Build the report using a Python environment containing ReportLab:
 
-    C:/Users/NausherwanKhanArzani/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe scripts/build_report.py
+    python scripts/build_report.py
 
 Report builder uses actual summaries and fails without reviewed analysis. It lays
 out 8 pages matching manual section 14. Fix any overflow; verify <=8 with pypdf,
 render ALL pages with bundled pdftoppm, inspect every page image, repair layout.
 Final path: output/pdf/27100384_PA2_Report.pdf. Do not deliver placeholder scores.
-The student name/roll must remain exact. Read PDF skill for final output citation.
+The student name/roll must remain exact.
 
 ## Package and Git
 

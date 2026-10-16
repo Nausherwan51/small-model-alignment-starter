@@ -78,7 +78,7 @@ against all 24 pages of `docs/assignment_manual.pdf` (sections 3-17).
 - No GPU job submission is authorized by merely configuring credentials.
 - The user explicitly chose main on their fork for pushes. Verify the destination
   is https://github.com/Nausherwan51/small-model-alignment-starter.git immediately
-  before pushing. Do not push to the course upstream or create a codex/ branch.
+  before pushing. Do not push to the course upstream or create another branch.
 - Record verified observations separately from proposed choices and future work.
 - On 2026-10-15 the user authorized preserving completed checkpoints, recovering
   timed-out UltraFeedback in a separate GPU job, and implementing full resume.

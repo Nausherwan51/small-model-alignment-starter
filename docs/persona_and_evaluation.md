@@ -24,10 +24,8 @@ Timeout is 3,600 seconds. These startup checks are not final evaluation results.
 The original SFT/DPO job and its input version were not edited, restarted or
 cancelled. Both jobs were confirmed RUNNING after the persona submission.
 
-The existing 15-minute heartbeat now covers both jobs in one scheduled check,
-storing separate main/persona snapshots. It reports terminal states once and
-continues watching the remaining job. Scheduled model work consumes Codex
-allowance; Kaggle GPU execution consumes Kaggle quota independently.
+Monitoring snapshots are stored separately for the main and persona jobs.
+Kaggle GPU execution consumes the account's GPU quota.
 
 ## Persona LoRA-DPO
 
