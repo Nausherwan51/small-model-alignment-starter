@@ -1,7 +1,8 @@
 {
   "all_pages_inspected": true,
   "page_count": 8,
-  "pdf_sha256": "d9cfa404b3d27abbbc4f71a3a248dd340454472a2cc6c7c8d8d5a707cd304e4c",
+  "pdf_sha256": "4439eddb21bf151d8c5d66cfec5a5910ae0ff2519bcc2f4313e1fec51e45f291",
   "method": "Poppler 100 DPI rendering of all eight final pages; every page visually inspected for text/table/plot legibility, overlap, clipping, footer/page numbering and section transitions. No defects found.",
-  "render_prefix": "tmp/pdfs/final"
+  "render_prefix": "tmp/pdfs/repo-link",
+  "repository_uri_verified": "https://github.com/Nausherwan51/small-model-alignment-starter"
 }

@@ -70,7 +70,7 @@ def main():
         p("INTERNAL VALIDATION DRAFT - Gemini 3.8 results; primary evaluation pending", "SubPA")
     p("Advanced Generative AI - Programming Assignment 2", "SubPA")
     p("<b>Nausherwan Khan Arzani | Roll number 27100384</b>")
-    p('Repository: <link href="https://github.com/Nausherwan51/small-model-alignment-starter">github.com/Nausherwan51/small-model-alignment-starter</link>', "SmallPA")
+    p('<b>Project repository</b><br/><link href="https://github.com/Nausherwan51/small-model-alignment-starter" color="#175a96">https://github.com/Nausherwan51/small-model-alignment-starter</link>', "BodyPA")
     sub("1. Experiment design and implementation")
     p("The main experiment compares two independent DPO policies with the same SFT baseline. SFT and both main DPO loops use original PyTorch code; Transformers supplies model/tokenizer loading. TRL DPOTrainer and PEFT are confined to the separate persona experiment. No main-track prebuilt trainer is used. DPO follows the response-level objective in [1].")
     p("Main model: Qwen/Qwen2.5-0.5B [2], revision 060db6499f32faf8b98477b0a26969ef7d8b9987. Persona model: HuggingFaceTB/SmolLM2-360M-Instruct [3], revision a10cc1512eabd3dde888204e902eca88bddb4951. Both DPO policies start independently from SFT best; their reference is a frozen copy of that same checkpoint. The persona reference is the unadapted base with its adapter disabled.")
