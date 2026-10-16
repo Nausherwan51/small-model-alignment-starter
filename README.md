@@ -15,8 +15,15 @@ by `scripts/prepare_kaggle.py`; it excludes credentials and model caches. GPU
 execution is authorized by the user but experimental results must be checked
 from saved outputs. Persona LoRA-DPO, resumable generation, blinded comparisons
 and Kaggle judging code are described in `docs/persona_and_evaluation.md`.
-All four training tracks are complete. Saved evidence and plots are under
-`submission/27100384/`; generation evaluation and the final report are in progress.
+All four training tracks, all 1,548 saved generations and all 624 primary judgments
+are complete and verified. The eight-page report, four training plots, evaluation
+summary and reproducibility evidence are under `submission/27100384/`; the portable
+archive is `submission/27100384_PA2_Submission.zip`. Primary Gemini 3.6 results:
+UF 102W/41T/157L, HH 178W/20T/102L, persona 3W/18T/3L. All persona style outcomes
+are ties. These results show HH relative gains, UF regression and weak persona
+transfer. Automatic Gemini 3.8 validation is separate secondary evidence.
+All 64 local tests passed (including the CPU persona integration test); nine
+evaluation tests also passed after the missing-only judging recovery controls.
 UF completed in a separate recovery job from step-300 weights with optimizer/RNG
 reset, after the original serial job timed out at step 405. This is not exact
 continuation. See `submission/27100384/training_audit.json` for actual metrics.
@@ -79,8 +86,8 @@ PYTHONPATH=. python -m pytest -q tests/test_public_adapter_smoke.py
 ```
 
 The tests use a tiny local tokenizer and model, so they do not download a model,
-load the assignment datasets, or require a GPU. The starter adapter raises
-`NotImplementedError` until you connect it to your implementation. Passing the
+load the assignment datasets, or require a GPU. The original starter adapter raised
+`NotImplementedError`; all six wrappers are now implemented. Passing the
 public tests checks the interface and a few basic invariants; the private grader
 also checks numerical correctness and harder edge cases described in the manual.
 

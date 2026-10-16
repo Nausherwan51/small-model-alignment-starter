@@ -1,0 +1,58 @@
+{
+  "sample_count": 24,
+  "counts": {
+    "win": 3,
+    "loss": 3,
+    "tie": 18,
+    "unknown": 0,
+    "failure": 0,
+    "pending": 0
+  },
+  "rates_all_pairs": {
+    "win": 0.125,
+    "loss": 0.125,
+    "tie": 0.75,
+    "unknown": 0.0,
+    "failure": 0.0,
+    "pending": 0.0
+  },
+  "win_rate_decisive": 0.5,
+  "win_rate_ties_half": 0.5,
+  "denominators": {
+    "decisive": 6,
+    "valid_including_ties": 24,
+    "all": 24
+  },
+  "persona_style_counts": {
+    "tie": 24
+  },
+  "by_category": {
+    "cooking": {
+      "tie": 4,
+      "win": 2
+    },
+    "coding": {
+      "tie": 6
+    },
+    "general_help": {
+      "tie": 4,
+      "win": 1,
+      "loss": 1
+    },
+    "safety": {
+      "tie": 4,
+      "loss": 2
+    }
+  },
+  "failed_request_attempts_recorded": 3,
+  "retries_in_successful_requests": 1,
+  "judge_model": "google/gemini-3.6-flash",
+  "interface": "Kaggle Model Proxy /openapi recovery after instrumented utility run",
+  "requested_temperature": 0,
+  "temperature_parameter_supported": false,
+  "max_tokens": 8192,
+  "sdk_client_max_retries": 0,
+  "recovery_batch_size": 1,
+  "primary_run_id": 4802428,
+  "recovery_only_missing": true
+}

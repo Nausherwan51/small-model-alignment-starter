@@ -1,0 +1,7 @@
+{
+  "all_pages_inspected": true,
+  "page_count": 8,
+  "pdf_sha256": "d9cfa404b3d27abbbc4f71a3a248dd340454472a2cc6c7c8d8d5a707cd304e4c",
+  "method": "Poppler 100 DPI rendering of all eight final pages; every page visually inspected for text/table/plot legibility, overlap, clipping, footer/page numbering and section transitions. No defects found.",
+  "render_prefix": "tmp/pdfs/final"
+}

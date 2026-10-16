@@ -4,8 +4,17 @@ Nausherwan Khan Arzani - 27100384
 
 Repository: https://github.com/Nausherwan51/small-model-alignment-starter
 
-This directory is being assembled from verified saved artifacts. It is not yet
-a complete submission: full generation, blinded judging and the final PDF remain.
+This is the completed submission bundle: the eight-page report, training plots,
+1,548 saved generations, 624 verified primary judgments, exact configurations,
+data/evaluation manifests, and test/backup audits. See `evaluation_summary.md`.
+The archive includes original source under `source/` and excludes model weights,
+local environments and credentials. University portal upload is not performed.
+
+Primary Gemini 3.6 results are under `evaluation/`; automatic Gemini 3.8 validation
+remains separately labelled in `evaluation/validation_gemini_3_8/`. That directory's
+`report_analysis.json` is historical secondary analysis, not the final report's
+analysis. All 39 primary parsing failures were recovered without repeating the
+585 already-valid judgments. Final unresolved failures are zero.
 
 ## Completed training
 

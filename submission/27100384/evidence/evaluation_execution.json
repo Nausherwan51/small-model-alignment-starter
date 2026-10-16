@@ -1,0 +1,141 @@
+{
+  "status": "evaluation_report_complete_packaging",
+  "sanity_version": 4,
+  "kernels": [
+    "nausherwan123/pa2-generation-notebook-sanity-27100384",
+    "nausherwan123/pa2-generation-notebook-hh-sanity-27100384"
+  ],
+  "settings": {
+    "repetition_penalty": 1.1,
+    "no_repeat_ngram_size": 4,
+    "max_prompt_length": 512
+  },
+  "backup_session": 64435,
+  "full_generation_submitted": true,
+  "judging_submitted": true,
+  "targeted_tests": "9 evaluation tests passed; 4 recovery input tests passed with filesystem access",
+  "full_suite": "64 passed, 1 benign PEFT warning; 45.70 seconds",
+  "uf_backup_verified": true,
+  "uf_backup_files": 29,
+  "uf_backup_bytes": 9913054653,
+  "selected_weights_audit": "submission/27100384/evidence/selected_weights_audit.json",
+  "full_generation_kernel": "nausherwan123/pa2-generation-notebook-full-27100384",
+  "full_generation_version": 1,
+  "full_generation_submitted_at": "2026-10-15T21:05:58.085653+00:00",
+  "full_generation_private_input": "nausherwan123/pa2-generation-private-inputs-27100384",
+  "full_input_private_verified": true,
+  "sanity_inspection": "outputs/generation_sanity_inspection.json",
+  "pdf_artifact_marker_already_run": true,
+  "pdf_artifact_marker_operation": "create; expected count 1; PDF",
+  "report_builder": "scripts/build_report.py",
+  "judge_task": "pa2-27100384-pairwise-evaluation",
+  "next_steps": [
+    "Build and inspect final ZIP",
+    "Commit and push verified user fork/main",
+    "Deliver artifacts; university portal upload remains"
+  ],
+  "automatic_finalization": true,
+  "finalization_runbook": "docs/finalization_runbook.md",
+  "private_upload_helper_tests": "2 passed",
+  "privacy_incident": {
+    "old_slug": "nausherwan123/pa2-gen-full-27100384",
+    "deleted": true,
+    "replacement_private_verified": true,
+    "contents": "original code and fixed prompts only; no credentials or weights"
+  },
+  "generation_complete": true,
+  "generation_responses_verified": 1548,
+  "generation_pairs": {
+    "uf": 300,
+    "hh": 300,
+    "persona": 24
+  },
+  "generation_reported": true,
+  "generation_verified_at": "2026-10-16T00:46:32.189435+00:00",
+  "judging_input_dataset": "nausherwan123/pa2-evaluation-pairs-27100384",
+  "judging_upload_session": 90035,
+  "judging_upload_command": "scripts/upload_private_dataset.py --path outputs/evaluation_upload/dataset --mode create",
+  "judging_upload_note": "Do not start a duplicate uploader. Check privacy_receipt/private_upload_verified.json and current uploader process/session first. Then push utility task once.",
+  "judging_upload_complete": true,
+  "judging_input_private_verified": true,
+  "judge_task_version": 2,
+  "judge_source_kernel_id": 138942961,
+  "judge_task_private": true,
+  "judge_creation_state": "COMPLETED",
+  "judge_task_response_record": "outputs/monitoring/judge_task_creation.json",
+  "judge_cli_note": "CLI create returned unknown enum KeyError after successful server creation. Task confirmed via read-only SDK response hook. Do not repush or request another run until creation outputs checked.",
+  "judge_preflight_rejected_versions": [
+    1
+  ],
+  "judge_v1_failure": "Benchmark validator requires instrumented llm.prompt calls; direct proxy calls were not accepted",
+  "judge_fix": "Use passed kbench.llm via llm.prompt and fresh chats; disable SDK client retries; same saved pairs and original batch checkpoint parser",
+  "judge_fix_tests": "9 evaluation tests passed",
+  "judge_new_version_submitted": true,
+  "judge_model_slug_verified": "gemini-3.6-flash",
+  "judge_v2_input_private_verified": true,
+  "judge_validation_kernel": "nausherwan123/new-benchmark-task-68ad9",
+  "judge_validation_run_id": 4801375,
+  "judge_validation_model": "gemini-3.8-flash",
+  "judge_validation_run_state": "COMPLETED",
+  "judge_validation_started_at": "2026-10-16T07:07:33.511Z",
+  "judge_validation_last_checked_at": "2026-10-16T07:19:44.953841+00:00",
+  "judge_primary_model": "gemini-3.6-flash",
+  "judge_validation_note": "Kaggle auto-created a Gemini 3.8 Flash validation run. Do not duplicate it or falsely label its results as 3.6. Inspect/download its outputs after completion, then explicitly schedule the manual-preferred available Gemini 3.6 Flash primary evaluation once if needed.",
+  "judge_validation_artifacts_verified": true,
+  "judge_validation_artifacts": "submission\\27100384\\evaluation\\validation_gemini_3_8",
+  "judge_validation_reported": true,
+  "judge_primary_run_id": 4802428,
+  "judge_primary_run_state": "COMPLETED",
+  "judge_primary_submitted": true,
+  "judge_validation_all_judgments_valid": true,
+  "report_layout_draft": "tmp/pdfs/validation_layout_draft.pdf",
+  "report_layout_pages": 8,
+  "report_layout_all_pages_inspected": true,
+  "report_layout_note": "Internal draft uses labelled Gemini 3.8 secondary evidence only; final report remains gated on verified Gemini 3.6 primary results.",
+  "primary_import_script": "scripts/audit_judgments.py",
+  "report_final_visual_review_required": true,
+  "judge_primary_progress": {
+    "checked_at": "2026-10-16T08:37:56.206543+00:00",
+    "run_id": 4802428,
+    "run_state": "RUNNING",
+    "highest_completed_track": "uf",
+    "uf_counts": {
+      "win": 93,
+      "loss": 143,
+      "tie": 34,
+      "unknown": 0,
+      "failure": 30,
+      "pending": 0
+    },
+    "unresolved_uf_failures_reported": true,
+    "plan": "Preserve completed judgments on terminal run, inspect failures, recover only the missing 30 UF pairs without repeating successful calls. Do not publish partial results as final."
+  },
+  "judge_primary_initial_counts": {
+    "uf": {
+      "saved": 270,
+      "missing": 30
+    },
+    "hh": {
+      "saved": 295,
+      "missing": 5
+    },
+    "persona": {
+      "saved": 20,
+      "missing": 4
+    }
+  },
+  "judge_primary_missing_total": 39,
+  "judge_recovery_directory": "outputs\\judging_recovery",
+  "judge_recovery_note": "Only 39 missing pairs, batch size 1; same judge and omitted temperature; 585 saved judgments verified and preserved. Original download immutable.",
+  "judge_recovery_session": 24732,
+  "judge_recovery_command": "scripts/judge_saved_proxy.py --directory outputs/judging_recovery --batch-size 1 --omit-temperature",
+  "judge_recovery_do_not_duplicate": true,
+  "judge_recovery_complete": true,
+  "judge_recovery_request_count": 39,
+  "judge_recovery_missing": 0,
+  "judge_primary_artifacts_verified": true,
+  "report_final_complete": true,
+  "report_final_pages": 8,
+  "report_final_all_pages_inspected": true,
+  "report_final_sha256": "d9cfa404b3d27abbbc4f71a3a248dd340454472a2cc6c7c8d8d5a707cd304e4c"
+}

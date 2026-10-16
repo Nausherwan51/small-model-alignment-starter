@@ -1,0 +1,57 @@
+{
+  "sample_count": 24,
+  "counts": {
+    "win": 3,
+    "loss": 2,
+    "tie": 15,
+    "unknown": 0,
+    "failure": 4,
+    "pending": 0
+  },
+  "rates_all_pairs": {
+    "win": 0.125,
+    "loss": 0.08333333333333333,
+    "tie": 0.625,
+    "unknown": 0.0,
+    "failure": 0.16666666666666666,
+    "pending": 0.0
+  },
+  "win_rate_decisive": 0.6,
+  "win_rate_ties_half": 0.525,
+  "denominators": {
+    "decisive": 5,
+    "valid_including_ties": 20,
+    "all": 24
+  },
+  "persona_style_counts": {
+    "tie": 20,
+    "failure": 4
+  },
+  "by_category": {
+    "cooking": {
+      "tie": 4,
+      "win": 2
+    },
+    "coding": {
+      "tie": 6
+    },
+    "general_help": {
+      "tie": 4,
+      "win": 1,
+      "loss": 1
+    },
+    "safety": {
+      "tie": 1,
+      "loss": 1,
+      "failure": 4
+    }
+  },
+  "failed_request_attempts_recorded": 3,
+  "retries_in_successful_requests": 1,
+  "judge_model": "google/gemini-3.6-flash",
+  "interface": "kaggle_benchmarks instrumented llm.prompt",
+  "requested_temperature": 0,
+  "temperature_parameter_supported": false,
+  "max_tokens": 8192,
+  "sdk_client_max_retries": 0
+}

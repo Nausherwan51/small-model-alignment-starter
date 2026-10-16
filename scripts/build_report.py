@@ -2,6 +2,7 @@
 
 Run with a Python containing reportlab. Plotting uses scripts/plot_training.py.
 """
+import argparse
 import json
 from pathlib import Path
 from xml.sax.saxutils import escape
@@ -13,6 +14,8 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 
 ROOT = Path(__file__).resolve().parents[1]
 BUNDLE = ROOT / "submission/27100384"
+if not BUNDLE.exists() and (ROOT.parent / "training_audit.json").exists():
+    BUNDLE = ROOT.parent  # Portable archive keeps source/ beside evidence/
 WIDTH = A4[0] - 88
 
 
@@ -21,12 +24,20 @@ def load(path):
 
 
 def main():
-    summaries = {t: load(BUNDLE / f"evaluation/{t}_summary.json") for t in ("uf", "hh", "persona")}
-    analysis = load(BUNDLE / "evaluation/report_analysis.json")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--validation-draft", action="store_true", help="Internal layout draft using separately labelled secondary results")
+    args = parser.parse_args()
+    evaluation = BUNDLE / "evaluation"
+    if args.validation_draft:
+        evaluation /= "validation_gemini_3_8"
+    summaries = {t: load(evaluation / f"{t}_summary.json") for t in ("uf", "hh", "persona")}
+    analysis = load(evaluation / "report_analysis.json")
+    judge_model = "google/gemini-3.8-flash" if args.validation_draft else "google/gemini-3.6-flash"
     if not analysis.get("reviewed"):
         raise ValueError("Interpretation and representative examples require evidence review")
     for t, n in (("uf", 300), ("hh", 300), ("persona", 24)):
         assert summaries[t]["sample_count"] == n and summaries[t]["counts"]["pending"] == 0
+        assert summaries[t]["judge_model"] == judge_model
     audit = load(BUNDLE / "training_audit.json")
     assert audit["metadata_audit_passed"]
     styles = getSampleStyleSheet()
@@ -55,6 +66,8 @@ def main():
     def para_list(key):
         for text in analysis.get(key, []): p(escape(text))
     p("Small-model alignment", "TitlePA")
+    if args.validation_draft:
+        p("INTERNAL VALIDATION DRAFT - Gemini 3.8 results; primary evaluation pending", "SubPA")
     p("Advanced Generative AI - Programming Assignment 2", "SubPA")
     p("<b>Nausherwan Khan Arzani | Roll number 27100384</b>")
     p('Repository: <link href="https://github.com/Nausherwan51/small-model-alignment-starter">github.com/Nausherwan51/small-model-alignment-starter</link>', "SmallPA")
@@ -82,7 +95,12 @@ def main():
     p("AMP skipped 3 HH update attempts and 3 attempts in each retained UF segment (6 total); windows still advanced. Thus HH applied 466 optimizer updates and the retained UF trajectory applied 463 across 469 windows. Metrics remain finite. This is a documented training limitation. Recovery now saves an atomic full restart state every 10 update boundaries, independently of best selection, with data order/config/reference checks and an 8-hour budget stop.")
     sub("Persona choices and generation")
     p("Rank 8 and q/v projections constrain adaptation to 819,200 trainable parameters; alpha 16 scales the low-rank update and dropout .05 regularizes the 220-row dataset. LR 5e-5, effective batch 16 and three epochs provide a short conservative adaptation. Selection uses earliest maximum validation reward accuracy, retaining step 13 rather than step 39 after an accuracy tie. This limits the claim: a 22-pair holdout can saturate without visible persona transfer.")
-    p("Evaluation is greedy (do_sample=False), 1 beam, temperature=1 and top-p=1 (inactive under greedy), max new tokens=256, prompt cap=512, length penalty=1. After inspecting three examples per generation file, repetition penalty changed from 1.0 to 1.1 and no-repeat 4-gram from 0 to 4 for all models. Three Alpaca instructions exceeded the initial 256-token budget (maximum 304 before formatting); the 512-token evaluation cap preserves complete fixed prompts. Training limits are unchanged. Persona uses the supplied tokenizer's chat template with add_generation_prompt=True. Decoding changes are diagnostic choices, not a measured hyperparameter ablation.")
+    p("Evaluation is greedy, 1 beam, max new tokens=256, length penalty=1. Temperature=1 and top-p=1 are inactive under greedy decoding. Persona uses the tokenizer chat template with add_generation_prompt=True. The manual permits deterministic anti-repetition controls (sections 8 and 12) and requires matched comparison settings and documented deviations (14.2-14.3). The following are changes from our initial evaluation setup, not changes to the training recipe.","SmallPA")
+    table([["Evaluation setting", "Initial -> final", "Reason and observed evidence"],
+        ["Prompt-token cap", "256 -> 512", "3 Alpaca instructions exceed 256; formatted maximum 310. All fixed prompts fit intact at 512."],
+        ["Repetition penalty", "1.0 -> 1.1", "Initial sanity outputs contained repeated sentences/lists; use modest deterministic control for every model."],
+        ["No-repeat n-gram", "0 -> 4", "Block exact 4-gram loops consistently across comparisons; potential effects on code remain a limitation."]], [105,82,WIDTH-187])
+    p("Three samples per generation file were inspected before full generation. Anti-repetition controls were changed together: this is qualitative sanity checking, not an isolated ablation or proof of improved judged quality. No formal hyperparameter ablation was run or required. Training settings and fixed evaluation prompt contents are unchanged.","SmallPA")
     page()
     heading("3. Training behavior: SFT and HH")
     figure("sft")
@@ -99,13 +117,15 @@ def main():
     page()
     heading("5. Blinded generation evaluation")
     p("Saved responses are paired before judging. A seeded A/B randomization hides generator and checkpoint identities in separate mapping files. The judge receives only instruction, Response A, Response B, rubric and opaque pair ID. The same prompts and decoding are used within each comparison. Main results use 300 UF-versus-SFT Alpaca pairs and 300 HH-versus-SFT synthetic pairs; persona compares best adapter against its unadapted base on 24 held-out prompts.")
-    p("Judge: google/gemini-3.6-flash through Kaggle-supported model access. Each request has at most five pairs, with at least five seconds after every attempt, including retries; up to three attempts are permitted. Strict parsing rejects missing/extra IDs or invalid labels. Each successful batch is checkpointed and resumable. Unknown judgments and exhausted failures remain separate from ties; neither enters the valid win-rate denominator.")
+    p(f"Judge: {judge_model} through Kaggle-supported model access. Each request has at most five pairs, with at least five seconds after every attempt, including retries; up to three attempts are permitted. Strict parsing rejects missing/extra IDs or invalid labels. Each successful batch is checkpointed and resumable. Unknown judgments and exhausted failures remain separate from ties; neither enters the valid win-rate denominator.")
+    p("Kaggle automatically ran Gemini 3.8 Flash during task validation; those judgments are preserved separately as secondary evidence. The explicitly scheduled Gemini 3.6 run is the primary evaluation. Temperature 0 was requested, but the SDK marks temperature unsupported and omits it; no controlled judge-temperature claim is made. Request output limit is 8,192 tokens and SDK-internal retries are disabled.","SmallPA")
+    p("The primary utility run saved 585 valid judgments and left 39 malformed/invalid-JSON cases (UF 30, HH 5, persona 4). Those cases alone were recovered through Kaggle Model Proxy /openapi with the same judge, rubric and settings, in single-pair requests; all 39 succeeded on the first recovery attempt. The original successful judgments were retained unchanged. Final unresolved failures are zero; historical exhausted attempts remain recorded below.","SmallPA")
     rows = [["Candidate / baseline", "N", "W / T / L", "Unknown / fail", "Decisive win", "Ties half"]]
     pct = lambda value: "n/a" if value is None else f"{100*value:.1f}%"
     for track,label in (("uf","UF / SFT"),("hh","HH / SFT"),("persona","Persona / base")):
         s=summaries[track]; c=s["counts"]
         rows.append([label,s["sample_count"],f"{c['win']} / {c['tie']} / {c['loss']}",f"{c['unknown']} / {c['failure']}",pct(s["win_rate_decisive"]),pct(s["win_rate_ties_half"])])
-    table(rows,[115,25,88,86,95,WIDTH-409])
+    table(rows,[106,34,88,86,95,WIDTH-409])
     p("Decisive win rate = W/(W+L). Ties-half rate = (W+0.5T)/(W+L+T). Counts are from the candidate's perspective; the reported rates are not combined across unlike evaluation sets.", "SmallPA")
     for track in ("uf","hh","persona"):
         s=summaries[track]
@@ -128,7 +148,7 @@ def main():
     page()
     heading("7. Limits and reproducibility")
     para_list("limitations")
-    p("One training seed, one small model family, a single automated judge and fixed modest evaluation sets limit generalization. The synthetic HH set is not a comprehensive safety benchmark. Greedy decoding and 4-gram blocking can change response quality, including code; matched settings support fair within-track comparison but do not isolate decoding effects. Training truncation may remove response content or EOS; 256-token evaluation output limits can truncate otherwise useful answers.")
+    p("One training seed, one main model family, automated judging and fixed modest evaluation sets limit generalization. The secondary validation judge is not a substitute for human review. The synthetic HH set is not a comprehensive safety benchmark. Greedy decoding and 4-gram blocking can change response quality, including code; matched settings support fair within-track comparison but do not isolate decoding effects. Training truncation may remove response content or EOS; 256-token evaluation output limits can truncate otherwise useful answers.")
     p("The UF optimizer reset and skipped AMP updates depart from an uninterrupted epoch. Persona selection is based on a tiny saturated preference holdout. Neither validation accuracy nor a favorable pairwise judgment guarantees correctness or safety. No claim of human preference agreement or statistical significance is made.")
     sub("Reproduce the submitted evidence")
     table([["Artifact", "Repository path"],
@@ -159,16 +179,16 @@ def main():
     for label,url in refs:
         p(escape(label) + (f"<br/><link href='{escape(url)}'>{escape(url)}</link>" if url else ""),"SmallPA")
     sub("Immutable data revisions")
-    manifest=load(ROOT / "outputs/prepared/manifest.json")
+    manifest=load(BUNDLE / "evidence/data/manifest.json")
     for name,rev in manifest["dataset_revisions"].items(): p(escape(name)+": "+rev,"SmallPA")
     sub("Executed training jobs")
     p("Private Kaggle jobs under nausherwan123: pa2-sft-dpo-20261015 v1 (SFT and HH complete; UF timeout); pa2-uf-recovery-20261015 v3 (UF complete); pa2-persona-lora-dpo-20261015 v1 (complete). Model selection: SFT 938; HH 469; UF 469; persona adapter 13. Main original source SHA-256: 4de54e09cd9bb479716d4d3b70a2f6128723bc8f6dabcb4ae68366310a0ebdbc. Recovery source SHA-256: 3f0ba60153cfac04503d47b665f31fa69cb8c95e27861b59cf7f7eaa0eda1d77.","SmallPA")
-    output=ROOT / "output/pdf/27100384_PA2_Report.pdf"
+    output=ROOT / ("tmp/pdfs/validation_layout_draft.pdf" if args.validation_draft else "output/pdf/27100384_PA2_Report.pdf")
     output.parent.mkdir(parents=True,exist_ok=True)
     def footer(canvas,doc):
         canvas.setStrokeColor(colors.HexColor("#c6d4df")); canvas.line(44,37,A4[0]-44,37)
         canvas.setFont("Helvetica",8); canvas.setFillColor(colors.HexColor("#627689"))
-        canvas.drawString(44,24,"Nausherwan Khan Arzani | 27100384 | Advanced GenAI PA2")
+        canvas.drawString(44,24,"VALIDATION DRAFT - Gemini 3.8" if args.validation_draft else "Nausherwan Khan Arzani | 27100384 | Advanced GenAI PA2")
         canvas.drawRightString(A4[0]-44,24,str(doc.page))
     SimpleDocTemplate(str(output),pagesize=A4,rightMargin=44,leftMargin=44,topMargin=39,bottomMargin=49,
         title="Advanced GenAI PA2 - 27100384",author="Nausherwan Khan Arzani").build(story,onFirstPage=footer,onLaterPages=footer)

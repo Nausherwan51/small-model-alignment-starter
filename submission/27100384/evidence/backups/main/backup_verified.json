@@ -1,0 +1,262 @@
+{
+  "kernel": "nausherwan123/pa2-sft-dpo-20261015",
+  "files": {
+    "pa2/outputs/dpo_hh/best/added_tokens.json": {
+      "bytes": 605,
+      "sha256": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b"
+    },
+    "pa2/outputs/dpo_hh/best/chat_template.jinja": {
+      "bytes": 2427,
+      "sha256": "44d5f08f3f72b837eaad09f13a54c1f9f4eb58d75240334548b7fd52a5437fa5"
+    },
+    "pa2/outputs/dpo_hh/best/config.json": {
+      "bytes": 1249,
+      "sha256": "428405fd2d0f3b959ae99dfa0e91b0118d74f153020f026497c65c5b7fe0ea45"
+    },
+    "pa2/outputs/dpo_hh/best/generation_config.json": {
+      "bytes": 117,
+      "sha256": "ce8f331663b06a8432e8531185822a55f95cc92cde3ff9518e05e0c73d6918d3"
+    },
+    "pa2/outputs/dpo_hh/best/merges.txt": {
+      "bytes": 1671853,
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    "pa2/outputs/dpo_hh/best/special_tokens_map.json": {
+      "bytes": 616,
+      "sha256": "6676f091c8bc4d1b50146427cfde92073402866b87b6e39223227931b70083e9"
+    },
+    "pa2/outputs/dpo_hh/best/tokenizer.json": {
+      "bytes": 11421896,
+      "sha256": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa"
+    },
+    "pa2/outputs/dpo_hh/best/tokenizer_config.json": {
+      "bytes": 4689,
+      "sha256": "60f6e7bc948cedd377a20f01d022ef664d026fbc93d72e0a9bdac233f8632181"
+    },
+    "pa2/outputs/dpo_hh/best/training_metadata.json": {
+      "bytes": 3308,
+      "sha256": "9f0d5dd00aa3fda35a0e4f3e44afe3ec37f5fa876a84133eadcadd16e5ef3796"
+    },
+    "pa2/outputs/dpo_hh/best/vocab.json": {
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "pa2/outputs/dpo_hh/complete.json": {
+      "bytes": 290,
+      "sha256": "0fc9efd6e12be01291e2ba05f6718c3f0964708f4e54fc4719e1dc5f79002a48"
+    },
+    "pa2/outputs/dpo_hh/config.json": {
+      "bytes": 2895,
+      "sha256": "f9cd8e0e033078395b5fdc820f4c3782b41841181385ac136c8253c6a0c4539d"
+    },
+    "pa2/outputs/dpo_hh/final/added_tokens.json": {
+      "bytes": 605,
+      "sha256": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b"
+    },
+    "pa2/outputs/dpo_hh/final/chat_template.jinja": {
+      "bytes": 2427,
+      "sha256": "44d5f08f3f72b837eaad09f13a54c1f9f4eb58d75240334548b7fd52a5437fa5"
+    },
+    "pa2/outputs/dpo_hh/final/config.json": {
+      "bytes": 1249,
+      "sha256": "428405fd2d0f3b959ae99dfa0e91b0118d74f153020f026497c65c5b7fe0ea45"
+    },
+    "pa2/outputs/dpo_hh/final/generation_config.json": {
+      "bytes": 117,
+      "sha256": "ce8f331663b06a8432e8531185822a55f95cc92cde3ff9518e05e0c73d6918d3"
+    },
+    "pa2/outputs/dpo_hh/final/merges.txt": {
+      "bytes": 1671853,
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    "pa2/outputs/dpo_hh/final/special_tokens_map.json": {
+      "bytes": 616,
+      "sha256": "6676f091c8bc4d1b50146427cfde92073402866b87b6e39223227931b70083e9"
+    },
+    "pa2/outputs/dpo_hh/final/tokenizer.json": {
+      "bytes": 11421896,
+      "sha256": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa"
+    },
+    "pa2/outputs/dpo_hh/final/tokenizer_config.json": {
+      "bytes": 4689,
+      "sha256": "60f6e7bc948cedd377a20f01d022ef664d026fbc93d72e0a9bdac233f8632181"
+    },
+    "pa2/outputs/dpo_hh/final/training_metadata.json": {
+      "bytes": 3308,
+      "sha256": "9f0d5dd00aa3fda35a0e4f3e44afe3ec37f5fa876a84133eadcadd16e5ef3796"
+    },
+    "pa2/outputs/dpo_hh/final/vocab.json": {
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "pa2/outputs/dpo_hh/metrics.jsonl": {
+      "bytes": 150943,
+      "sha256": "25aca4d933a8a0818902e4847443b8bcb6605ba9a7ce7cbec90313a43648f106"
+    },
+    "pa2/outputs/dpo_uf/best/added_tokens.json": {
+      "bytes": 605,
+      "sha256": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b"
+    },
+    "pa2/outputs/dpo_uf/best/chat_template.jinja": {
+      "bytes": 2427,
+      "sha256": "44d5f08f3f72b837eaad09f13a54c1f9f4eb58d75240334548b7fd52a5437fa5"
+    },
+    "pa2/outputs/dpo_uf/best/config.json": {
+      "bytes": 1249,
+      "sha256": "428405fd2d0f3b959ae99dfa0e91b0118d74f153020f026497c65c5b7fe0ea45"
+    },
+    "pa2/outputs/dpo_uf/best/generation_config.json": {
+      "bytes": 117,
+      "sha256": "ce8f331663b06a8432e8531185822a55f95cc92cde3ff9518e05e0c73d6918d3"
+    },
+    "pa2/outputs/dpo_uf/best/merges.txt": {
+      "bytes": 1671853,
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    "pa2/outputs/dpo_uf/best/special_tokens_map.json": {
+      "bytes": 616,
+      "sha256": "6676f091c8bc4d1b50146427cfde92073402866b87b6e39223227931b70083e9"
+    },
+    "pa2/outputs/dpo_uf/best/tokenizer.json": {
+      "bytes": 11421896,
+      "sha256": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa"
+    },
+    "pa2/outputs/dpo_uf/best/tokenizer_config.json": {
+      "bytes": 4689,
+      "sha256": "60f6e7bc948cedd377a20f01d022ef664d026fbc93d72e0a9bdac233f8632181"
+    },
+    "pa2/outputs/dpo_uf/best/training_metadata.json": {
+      "bytes": 3307,
+      "sha256": "6455ba64919ed0eba2bc346a7d77690546064c818e67c5398bd4511797b81613"
+    },
+    "pa2/outputs/dpo_uf/best/vocab.json": {
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "pa2/outputs/dpo_uf/config.json": {
+      "bytes": 2895,
+      "sha256": "b015f2a7445222c0aeb7aacee2ad56712e708315319e7ee26c4365c02a255b86"
+    },
+    "pa2/outputs/dpo_uf/metrics.jsonl": {
+      "bytes": 129890,
+      "sha256": "cd9b5480fd69cb89da8eeb30ab9a5a2c3166e65eba112660d9edbf1084a10923"
+    },
+    "pa2/outputs/sft/best/added_tokens.json": {
+      "bytes": 605,
+      "sha256": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b"
+    },
+    "pa2/outputs/sft/best/chat_template.jinja": {
+      "bytes": 2427,
+      "sha256": "44d5f08f3f72b837eaad09f13a54c1f9f4eb58d75240334548b7fd52a5437fa5"
+    },
+    "pa2/outputs/sft/best/config.json": {
+      "bytes": 1249,
+      "sha256": "428405fd2d0f3b959ae99dfa0e91b0118d74f153020f026497c65c5b7fe0ea45"
+    },
+    "pa2/outputs/sft/best/generation_config.json": {
+      "bytes": 117,
+      "sha256": "ce8f331663b06a8432e8531185822a55f95cc92cde3ff9518e05e0c73d6918d3"
+    },
+    "pa2/outputs/sft/best/merges.txt": {
+      "bytes": 1671853,
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    "pa2/outputs/sft/best/special_tokens_map.json": {
+      "bytes": 616,
+      "sha256": "6676f091c8bc4d1b50146427cfde92073402866b87b6e39223227931b70083e9"
+    },
+    "pa2/outputs/sft/best/tokenizer.json": {
+      "bytes": 11421896,
+      "sha256": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa"
+    },
+    "pa2/outputs/sft/best/tokenizer_config.json": {
+      "bytes": 4689,
+      "sha256": "60f6e7bc948cedd377a20f01d022ef664d026fbc93d72e0a9bdac233f8632181"
+    },
+    "pa2/outputs/sft/best/training_metadata.json": {
+      "bytes": 3187,
+      "sha256": "4645bb700994ad3044e1ad12bca39b0270a615e5e8a3190b4b75134fb4bc84e9"
+    },
+    "pa2/outputs/sft/best/vocab.json": {
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "pa2/outputs/sft/complete.json": {
+      "bytes": 145,
+      "sha256": "b9ed23f7b027ce9f1d11fe8907d1e790117e6a5e5a6e26bb9adccf648cd69fb5"
+    },
+    "pa2/outputs/sft/config.json": {
+      "bytes": 2932,
+      "sha256": "62e069d98234115cac553bd1b48665bd316f863ed4347cd0df4641a557e1acd6"
+    },
+    "pa2/outputs/sft/final/added_tokens.json": {
+      "bytes": 605,
+      "sha256": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b"
+    },
+    "pa2/outputs/sft/final/chat_template.jinja": {
+      "bytes": 2427,
+      "sha256": "44d5f08f3f72b837eaad09f13a54c1f9f4eb58d75240334548b7fd52a5437fa5"
+    },
+    "pa2/outputs/sft/final/config.json": {
+      "bytes": 1249,
+      "sha256": "428405fd2d0f3b959ae99dfa0e91b0118d74f153020f026497c65c5b7fe0ea45"
+    },
+    "pa2/outputs/sft/final/generation_config.json": {
+      "bytes": 117,
+      "sha256": "ce8f331663b06a8432e8531185822a55f95cc92cde3ff9518e05e0c73d6918d3"
+    },
+    "pa2/outputs/sft/final/merges.txt": {
+      "bytes": 1671853,
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    "pa2/outputs/sft/final/special_tokens_map.json": {
+      "bytes": 616,
+      "sha256": "6676f091c8bc4d1b50146427cfde92073402866b87b6e39223227931b70083e9"
+    },
+    "pa2/outputs/sft/final/tokenizer.json": {
+      "bytes": 11421896,
+      "sha256": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa"
+    },
+    "pa2/outputs/sft/final/tokenizer_config.json": {
+      "bytes": 4689,
+      "sha256": "60f6e7bc948cedd377a20f01d022ef664d026fbc93d72e0a9bdac233f8632181"
+    },
+    "pa2/outputs/sft/final/training_metadata.json": {
+      "bytes": 3187,
+      "sha256": "4645bb700994ad3044e1ad12bca39b0270a615e5e8a3190b4b75134fb4bc84e9"
+    },
+    "pa2/outputs/sft/final/vocab.json": {
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "pa2/outputs/sft/metrics.jsonl": {
+      "bytes": 179648,
+      "sha256": "06a9510d88dd589c5e074f4d49b3137c7782c4914f4ee68372b7878f7ff7a6ee"
+    },
+    "pa2/provenance.json": {
+      "bytes": 4405,
+      "sha256": "b429256984b71a95cd14108ee5dda89153a1c8d86aff430f94e8b1d43dd013a2"
+    },
+    "pa2/outputs/dpo_hh/best/model.safetensors": {
+      "bytes": 1976163472,
+      "sha256": "ba5d09864ae03502afa4912e6fb63b9b713d738ac5c2c882e5020cef9ec0a0c6"
+    },
+    "pa2/outputs/dpo_hh/final/model.safetensors": {
+      "bytes": 1976163472,
+      "sha256": "ba5d09864ae03502afa4912e6fb63b9b713d738ac5c2c882e5020cef9ec0a0c6"
+    },
+    "pa2/outputs/dpo_uf/best/model.safetensors": {
+      "bytes": 1976163472,
+      "sha256": "4eb833d2c15144d4c90ee73ae89ec13ffe797d47b31ab9254be25f04f582b1a5"
+    },
+    "pa2/outputs/sft/best/model.safetensors": {
+      "bytes": 1976163472,
+      "sha256": "d75863fd41c1fbbced318cc3d8afe79e4a7a0eba4ee211ce30cef5298a5af7b0"
+    },
+    "pa2/outputs/sft/final/model.safetensors": {
+      "bytes": 1976163472,
+      "sha256": "d75863fd41c1fbbced318cc3d8afe79e4a7a0eba4ee211ce30cef5298a5af7b0"
+    }
+  },
+  "verified": true
+}

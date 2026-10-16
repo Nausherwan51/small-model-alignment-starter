@@ -1,0 +1,29 @@
+{
+  "fingerprint": "697b286322dcd3ba3d777e294602679f941b6de371881e1aa7b23b0c0d490e63",
+  "specification": {
+    "checkpoint": {
+      "model": "/tmp/pa2_models/hh",
+      "revision": null,
+      "adapter": null,
+      "weight_hashes": {
+        "/tmp/pa2_models/hh/model.safetensors": "ba5d09864ae03502afa4912e6fb63b9b713d738ac5c2c882e5020cef9ec0a0c6"
+      }
+    },
+    "generator": "hh_hh",
+    "settings": {
+      "do_sample": false,
+      "max_new_tokens": 256,
+      "max_prompt_length": 512,
+      "repetition_penalty": 1.1,
+      "no_repeat_ngram_size": 4,
+      "temperature": 1.0,
+      "top_p": 1.0,
+      "num_beams": 1,
+      "length_penalty": 1.0
+    },
+    "prompt_format": "instruction",
+    "prompts_sha256": "bb6d38d9c7e3c7ab73442ca0fd5b5767609b9e91678ae8b705475e593be7f5b5",
+    "chat_template": null,
+    "prompt_truncation": "head plus last min(32, max_prompt_length//4) tokens"
+  }
+}

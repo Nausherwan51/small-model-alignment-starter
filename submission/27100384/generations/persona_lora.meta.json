@@ -1,0 +1,29 @@
+{
+  "fingerprint": "952b6c1fc14f410fdb217635bc53f9f6d74472ff69f4503114e4bf3bac4fbdee",
+  "specification": {
+    "checkpoint": {
+      "model": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "adapter": "/kaggle/input/notebooks/nausherwan123/pa2-persona-lora-dpo-20261015/pa2_persona/outputs/persona/best",
+      "weight_hashes": {
+        "/kaggle/input/notebooks/nausherwan123/pa2-persona-lora-dpo-20261015/pa2_persona/outputs/persona/best/adapter_model.safetensors": "bdc75023ca2bffa44d1ff62c04ccd9dd5476009fb355ac0f6b140be590fbdc24"
+      }
+    },
+    "generator": "persona_lora",
+    "settings": {
+      "do_sample": false,
+      "max_new_tokens": 256,
+      "max_prompt_length": 512,
+      "repetition_penalty": 1.1,
+      "no_repeat_ngram_size": 4,
+      "temperature": 1.0,
+      "top_p": 1.0,
+      "num_beams": 1,
+      "length_penalty": 1.0
+    },
+    "prompt_format": "chat",
+    "prompts_sha256": "74fb845ebcc0b8e10f885b1f77f300cf60faad444a37c4ef99d14b3381a08b13",
+    "chat_template": "{% for message in messages %}{% if loop.first and messages[0]['role'] != 'system' %}{{ '<|im_start|>system\nYou are a helpful AI assistant named SmolLM, trained by Hugging Face<|im_end|>\n' }}{% endif %}{{'<|im_start|>' + message['role'] + '\n' + message['content'] + '<|im_end|>' + '\n'}}{% endfor %}{% if add_generation_prompt %}{{ '<|im_start|>assistant\n' }}{% endif %}",
+    "prompt_truncation": "head plus last min(32, max_prompt_length//4) tokens"
+  }
+}

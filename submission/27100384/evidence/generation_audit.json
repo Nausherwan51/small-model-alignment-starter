@@ -1,0 +1,55 @@
+{
+  "fixed_ids_and_instructions_verified": true,
+  "total_responses": 1548,
+  "stats": {
+    "base_alpaca": {
+      "rows": 300,
+      "max_input_tokens": 310,
+      "eos": 166,
+      "cap_hits": 134,
+      "empty": 0
+    },
+    "hh_hh": {
+      "rows": 300,
+      "max_input_tokens": 32,
+      "eos": 274,
+      "cap_hits": 26,
+      "empty": 0
+    },
+    "persona_base": {
+      "rows": 24,
+      "max_input_tokens": 49,
+      "eos": 8,
+      "cap_hits": 16,
+      "empty": 0
+    },
+    "persona_lora": {
+      "rows": 24,
+      "max_input_tokens": 49,
+      "eos": 8,
+      "cap_hits": 16,
+      "empty": 0
+    },
+    "sft_alpaca": {
+      "rows": 300,
+      "max_input_tokens": 310,
+      "eos": 239,
+      "cap_hits": 61,
+      "empty": 0
+    },
+    "sft_hh": {
+      "rows": 300,
+      "max_input_tokens": 32,
+      "eos": 244,
+      "cap_hits": 56,
+      "empty": 0
+    },
+    "uf_alpaca": {
+      "rows": 300,
+      "max_input_tokens": 310,
+      "eos": 171,
+      "cap_hits": 129,
+      "empty": 0
+    }
+  }
+}

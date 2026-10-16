@@ -1,7 +1,4 @@
 """Private utility benchmark: judge saved outputs only, never generate answers."""
-import os
-os.environ["LLM_DEFAULT"] = "google/gemini-3.6-flash"
-os.environ["LLMS_AVAILABLE"] = "google/gemini-3.6-flash"
 import kaggle_benchmarks as kbench
 
 
@@ -10,7 +7,8 @@ def evaluate_alignment(llm: kbench.LLMChat) -> float:
     import json
     import hashlib
     from pathlib import Path
-    import runpy
+    import time
+    import uuid
     import shutil
     import sys
     import zipfile
@@ -43,16 +41,34 @@ def evaluate_alignment(llm: kbench.LLMChat) -> float:
             raise ValueError("Saved comparison hash mismatch")
         shutil.copy2(path, destination / path.name)
     sys.path.insert(0, str(root))
-    previous = sys.argv
-    try:
-        sys.argv = ["judge_saved_proxy.py", "--directory", str(destination), "--env-file", "", "--judge-model", "google/gemini-3.6-flash"]
-        runpy.run_path(str(root / "scripts/judge_saved_proxy.py"), run_name="__main__")
-    finally:
-        sys.argv = previous
+    from alignment.evaluation import judge_saved_pairs, read_jsonl, summarize
+    from alignment.data import write_json
+    # Keep each request visible to Kaggle's benchmark instrumentation. Disable
+    # hidden client retries so the original evaluator controls every attempt.
+    if not hasattr(llm, "client") or not hasattr(llm.client, "with_options"):
+        raise TypeError("Expected Kaggle's OpenAI-compatible instrumented LLM")
+    llm.client = llm.client.with_options(max_retries=0, timeout=180)
+    judge_model = getattr(llm, "model", llm.name)
+    def client(prompt):
+        with kbench.chats.new("pa2-judge-" + uuid.uuid4().hex):
+            return llm.prompt(prompt, temperature=0, extra_api_params={"max_tokens": 8192})
+    for track in ("uf", "hh", "persona"):
+        time.sleep(5)
+        pairs = destination / f"{track}_pairs.jsonl"
+        identities = destination / f"{track}_identities.jsonl"
+        judgments = judge_saved_pairs(pairs, destination / f"{track}_judged.jsonl",
+                    destination / f"{track}_failures.jsonl", client, judge_model)
+        summary = summarize(read_jsonl(pairs), read_jsonl(identities), judgments,
+                    read_jsonl(destination / f"{track}_failures.jsonl"))
+        summary.update(judge_model=judge_model, interface="kaggle_benchmarks instrumented llm.prompt",
+                    requested_temperature=0, temperature_parameter_supported=llm.support_temperature,
+                    max_tokens=8192, sdk_client_max_retries=llm.client.max_retries)
+        write_json(destination / f"{track}_summary.json", summary)
+        print(json.dumps({"track": track, "summary": summary}), flush=True)
     summaries = {track: json.loads((destination / f"{track}_summary.json").read_text()) for track in ("uf", "hh", "persona")}
     if any(s["counts"]["pending"] for s in summaries.values()):
         raise ValueError("Unprocessed pairs remain")
-    (root / "complete.json").write_text(json.dumps({"judge": "google/gemini-3.6-flash", "tracks": list(summaries)}))
+    (root / "complete.json").write_text(json.dumps({"judge": judge_model, "tracks": list(summaries)}))
     # Operational completion only. Report track-specific quality from saved files.
     return 1.0
 

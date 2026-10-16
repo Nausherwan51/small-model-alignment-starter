@@ -1,0 +1,91 @@
+{
+  "approved": true,
+  "reviewer": "assistant manual text inspection",
+  "kernel_versions": 4,
+  "settings": {
+    "repetition_penalty": 1.1,
+    "no_repeat_ngram_size": 4,
+    "max_prompt_length": 512
+  },
+  "files": {
+    "base_alpaca": {
+      "rows": 3,
+      "sha256": "7d2425a3a210d56eef5b6db17698681253b2a92cbf42a1497e6c30ad26dcfa3a",
+      "eos_count": 2,
+      "generated_tokens": [
+        241,
+        256,
+        219
+      ]
+    },
+    "persona_base": {
+      "rows": 3,
+      "sha256": "cb084ba4c88360ff23948a386eb6d9f92b9a7a2964d7fbfd78ea15be5eaba5de",
+      "eos_count": 1,
+      "generated_tokens": [
+        230,
+        256,
+        256
+      ]
+    },
+    "persona_lora": {
+      "rows": 3,
+      "sha256": "dadf995bc962b13243946aeafbf0f168baace96c89395b16108d630b305d1755",
+      "eos_count": 1,
+      "generated_tokens": [
+        230,
+        256,
+        256
+      ]
+    },
+    "sft_alpaca": {
+      "rows": 3,
+      "sha256": "5cb9bcd89d28a57779335c894e70a0eb162a327ba47d99eb0ccdb36402dc157f",
+      "eos_count": 3,
+      "generated_tokens": [
+        47,
+        117,
+        143
+      ]
+    },
+    "sft_hh": {
+      "rows": 3,
+      "sha256": "5df4657f701fe4be47e37f2db8f5bf3399216a2098d35d5b5429e0aded159f63",
+      "eos_count": 2,
+      "generated_tokens": [
+        126,
+        256,
+        126
+      ]
+    },
+    "uf_alpaca": {
+      "rows": 3,
+      "sha256": "e379ad89067907af90c86a7b8fd0ae7eff7f940681362fb148b07783cb617e82",
+      "eos_count": 2,
+      "generated_tokens": [
+        81,
+        201,
+        256
+      ]
+    },
+    "hh_hh": {
+      "rows": 3,
+      "sha256": "c43b46aa4161553e499d82b41c0e383bf5bce152e742b93f1d1ebc43241e5d7f",
+      "eos_count": 2,
+      "generated_tokens": [
+        196,
+        256,
+        91
+      ]
+    }
+  },
+  "observations": [
+    "All 21 samples inspected. Checkpoint paths, tokenizer formats and weight identities match selected checkpoints.",
+    "Complete task opening and response boundary retained; longest formatted Alpaca prompt is 310 tokens; no fixed prompt needs truncation at 512.",
+    "EOS stopping is demonstrated on multiple samples; other responses stop at the documented 256-token output cap.",
+    "Anti-repetition controls reduce exact loops but factual errors and unsafe answers remain. These are measured model limitations, not hidden or post-edited.",
+    "Persona outputs change little and contain factual errors. No style success is claimed from the tiny saturated validation set.",
+    "Base Qwen sometimes continues with synthetic extra dialogue. Preserve raw output and report this behavior."
+  ],
+  "full_generation_gate": "Technical sanity satisfied; no requirement of favorable quality before fair evaluation."
+}

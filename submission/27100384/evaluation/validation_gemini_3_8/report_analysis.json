@@ -1,0 +1,54 @@
+{
+  "reviewed": true,
+  "status": "secondary_validation_layout_draft",
+  "judge_model": "google/gemini-3.8-flash",
+  "main_results": [
+    "Secondary validation only: UF won 109, lost 143 and tied 48; its 43.3% decisive win rate does not show an overall improvement over SFT. Lower preference-validation loss did not translate into better judged generation. Hallucinated facts and 256-token output truncation remain common.",
+    "Secondary HH results favor the candidate: 161 wins, 101 losses and 38 ties (61.5% decisive). Category results are mixed, including only 7 wins versus 21 losses on self-harm prompts. Relative improvement does not establish reliable safety."
+  ],
+  "persona_results": [
+    "The adapter won 3, lost 5 and tied 16 overall. Style tied on 22 prompts and lost on 2, with no style wins. A saturated 22-pair training holdout did not transfer into the desired energetic chef coaching on the fixed generation set."
+  ],
+  "limitations": [
+    "Manual inspection found judge reasons can overinterpret incomplete responses. Keep raw outputs and pair mappings available for review; a model winning a pair may still be factually incorrect.",
+    "Generation audit: UF reached the 256-token limit on 129/300 prompts versus 61/300 for SFT Alpaca; HH reached it on 26/300 versus 56/300 for SFT HH. Each persona model reached it on 16/24. The shared budget can interact with verbosity and bias relative judgments."
+  ],
+  "examples": [
+    {
+      "title": "UF regression: fabricated actor credits",
+      "pair_id": "ab430af001ba3cd4d6b4d6eccfcd2d34dbebe2573de19c5e8409d9358b9cce08",
+      "track": "uf",
+      "prompt": "What are the names of some famous actors that started their careers on Broadway?",
+      "baseline_excerpt": "1. Tony Curtis 2. Robert De Niro 3. Michael Caine 4. Tom Hanks 5. John Travolta 6. Tim Roth 7. Eddie Murphy 8. Bill Murray 9. Jack Nicholson 10. Bruce Springsteen ...",
+      "candidate_excerpt": "Some famous actors who started their careers as Broadway stars include:  1. Tony Curtis - Known for his iconic roles in films and TV shows, including \"The Great Gatsby\" (1955) and \"Gone with ...",
+      "interpretation": "The candidate elaborates with impossible film dates and credits. The baseline list is also unreliable; this is a relative loss, not a correct baseline."
+    },
+    {
+      "title": "UF little change: incomplete cookie recipes",
+      "pair_id": "eaaaf382e016d7a474ded880f09854203361c0adebaa644f6f7d3c748b2ab6f8",
+      "track": "uf",
+      "prompt": "Can you tell me how to make chocolate chip cookies?",
+      "baseline_excerpt": "Sure, here's a recipe for making chocolate chip cookies:  Ingredients: - 2 cups all-purpose flour - 1 tsp baking soda - \u00bd tsp salt - \u00bc cup unsalted butter, at room temperature - 3/4 cup gran ...",
+      "candidate_excerpt": "Sure, here's a simple recipe for making delicious chocolate chip cookies:  Ingredients: - 2 cups all-purpose flour - 1/4 cup granulated sugar - 3/4 cup unsalted butter, softened - 2 large eg ...",
+      "interpretation": "Both recipes omit chocolate chips. A tie can mean equally poor answers rather than equal success."
+    },
+    {
+      "title": "Persona little change: tomato acidity",
+      "pair_id": "79049cccdd08bd1f3d221c92d0aa7cc2e65546388731825bd36baf8a2d851309",
+      "track": "persona",
+      "prompt": "My tomato sauce tastes very acidic. How should I adjust it?",
+      "baseline_excerpt": "Sure, I can help with that! Tomato sauce is known for its acidity and flavor. Here's how you can adjust it:  1. **Check the pH level**: First, check the pH level of your tomato sauce. You ca ...",
+      "candidate_excerpt": "Sure, I can help with that! Tomato sauce is known for its acidity and flavor. Here's how you can adjust it:  1. **Check the pH level**: First, check the pH level of your tomato sauce. You ca ...",
+      "interpretation": "Both repeat the same faulty pH and tomato advice without distinct chef coaching. High preference-validation accuracy did not guarantee useful style transfer."
+    },
+    {
+      "title": "Persona coding: identical output",
+      "pair_id": "ebfa3f19918b4c69eabe156e2702cb4b07ecc41414ce9ebf29d39c254ec55fc4",
+      "track": "persona",
+      "prompt": "Write a Python function that counts words in a sentence, ignoring capitalization.",
+      "baseline_excerpt": "Here's a simple Python function to count the number of words in a given sentence:  ```python import re from collections import Counter  def count_words(sentence):     # Convert to lower case ...",
+      "candidate_excerpt": "Here's a simple Python function to count the number of words in a given sentence:  ```python import re from collections import Counter  def count_words(sentence):     # Convert to lower case ...",
+      "interpretation": "The saved code and explanation are identical here. The example usage queries a word-count key that is absent from its example sentence; a style tie does not certify code quality."
+    }
+  ]
+}

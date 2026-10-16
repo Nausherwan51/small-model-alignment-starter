@@ -1,6 +1,7 @@
 {
-  "suite": "PA2_TEST_PERSONA=1 python -m pytest -q tests --tb=short --basetemp outputs/test_tmp_all_authorized_20261016",
-  "result": "62 passed, 1 benign PEFT warning",
-  "seconds": 76.84,
-  "filesystem_access": "authorized Windows hardlink access for recovery-input test"
+  "suite": "PA2_TEST_PERSONA=1 python -m pytest -q tests --tb=short --basetemp outputs/test_tmp_finalization_20261016",
+  "result": "64 passed, 1 benign PEFT warning",
+  "seconds": 45.7,
+  "filesystem_access": "authorized Windows hardlink access for recovery-input test",
+  "includes": "public adapter, numerical and edge cases, training/restart, generation/judge, real CPU TRL/LoRA step, private dataset upload checks"
 }

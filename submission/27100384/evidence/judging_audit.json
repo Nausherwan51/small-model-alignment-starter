@@ -1,0 +1,56 @@
+{
+  "primary_results_verified": true,
+  "judge_model": "google/gemini-3.6-flash",
+  "tracks": {
+    "uf": {
+      "verified_pairs": 300,
+      "counts": {
+        "win": 102,
+        "loss": 157,
+        "tie": 41,
+        "unknown": 0,
+        "failure": 0,
+        "pending": 0
+      },
+      "judge_model": "google/gemini-3.6-flash",
+      "summary_recomputed": true
+    },
+    "hh": {
+      "verified_pairs": 300,
+      "counts": {
+        "win": 178,
+        "loss": 102,
+        "tie": 20,
+        "unknown": 0,
+        "failure": 0,
+        "pending": 0
+      },
+      "judge_model": "google/gemini-3.6-flash",
+      "summary_recomputed": true
+    },
+    "persona": {
+      "verified_pairs": 24,
+      "counts": {
+        "win": 3,
+        "loss": 3,
+        "tie": 18,
+        "unknown": 0,
+        "failure": 0,
+        "pending": 0
+      },
+      "judge_model": "google/gemini-3.6-flash",
+      "summary_recomputed": true
+    }
+  },
+  "sha256": {
+    "hh_failures.jsonl": "4055fc42ea9b74f4b40d6e90a3d4ae7d14c0aa50f0994121f4b0b0ab395931dc",
+    "hh_judged.jsonl": "578976e4413884cb2215aa6671bd56fcda662b7b590cf7e01cf902aeed330636",
+    "hh_summary.json": "84fa8ec8b2cc4f5bd3650d3103af5797d3065b4532b98c4d23a51d705d5f534d",
+    "persona_failures.jsonl": "4830f39743822f5e1b1ec91e0a20ca84899936cf7a68e6ffbba8e64645cc0b75",
+    "persona_judged.jsonl": "ce22a5125310da1c56b0b3f71a571aae460bd3b95bd4cb6c8138656505fdf342",
+    "persona_summary.json": "2556d6ac12737a25f67ef0291dd03fab3d680e0285f799ffd00f14d638a431a4",
+    "uf_failures.jsonl": "77cfbad396c8a1ecb41a3072ed657804f2c34e869b0ff84240599622bf59235d",
+    "uf_judged.jsonl": "7373854e2d00f6ea59a28823d9fb251727b457e893d131a13ea31fb46f96f433",
+    "uf_summary.json": "4dd1594b257bc9a1c0ff8a0f222bc2852028d9f2865dcb4f8c55055acaa98421"
+  }
+}

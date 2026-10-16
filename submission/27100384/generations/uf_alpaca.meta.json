@@ -1,0 +1,29 @@
+{
+  "fingerprint": "1afef74248ceed477e774774aecfe91b9cb7b9cfcf21967bb3d83399788a073e",
+  "specification": {
+    "checkpoint": {
+      "model": "/kaggle/input/notebooks/nausherwan123/pa2-uf-recovery-20261015/pa2/outputs/dpo_uf/best",
+      "revision": null,
+      "adapter": null,
+      "weight_hashes": {
+        "/kaggle/input/notebooks/nausherwan123/pa2-uf-recovery-20261015/pa2/outputs/dpo_uf/best/model.safetensors": "b8dff28cea32fee9da951ab33f7f57392942da171d961caee7613884ce364c09"
+      }
+    },
+    "generator": "uf_alpaca",
+    "settings": {
+      "do_sample": false,
+      "max_new_tokens": 256,
+      "max_prompt_length": 512,
+      "repetition_penalty": 1.1,
+      "no_repeat_ngram_size": 4,
+      "temperature": 1.0,
+      "top_p": 1.0,
+      "num_beams": 1,
+      "length_penalty": 1.0
+    },
+    "prompt_format": "instruction",
+    "prompts_sha256": "778ccd7abd47bf142865c3e1d1fcccf47e425f4d6850383eb3c10007d6773eb1",
+    "chat_template": null,
+    "prompt_truncation": "head plus last min(32, max_prompt_length//4) tokens"
+  }
+}

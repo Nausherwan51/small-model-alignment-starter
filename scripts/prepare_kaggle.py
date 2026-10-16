@@ -18,8 +18,9 @@ def source_paths(root):
     for folder, glob in (("alignment", "*.py"), ("tests", "*.py"), ("configs", "*.json"),
                          ("docs", "*.md"), ("scripts", "*.py"), ("kaggle", "*.py")):
         files.extend(sorted((root / folder).glob(glob)))
-    for relative in ("requirements-persona.txt", "data/persona_lora/README.md",
-                     "data/persona_lora/ramsay_style_preferences.json", "eval_sets/persona_eval_24_seed42.json"):
+    for relative in (".gitattributes", "requirements-persona.txt", "data/persona_lora/README.md",
+                     "data/persona_lora/ramsay_style_preferences.json", "eval_sets/persona_eval_24_seed42.json",
+                     "eval_sets/hh_rlhf_eval_300_seed42.json"):
         path = root / relative
         if path.exists():
             files.append(path)

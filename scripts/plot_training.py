@@ -6,6 +6,9 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 ROOT = Path(__file__).resolve().parents[1]
+BUNDLE = ROOT / "submission/27100384"
+if not BUNDLE.exists() and (ROOT.parent / "training_audit.json").exists():
+    BUNDLE = ROOT.parent
 
 
 def rows(path):
@@ -18,14 +21,14 @@ def smoothed(values, window=20):
 
 def main():
     plt.rcParams.update({"font.size": 9, "axes.spines.top": False, "axes.spines.right": False})
-    destination = ROOT / "submission/27100384/plots"
+    destination = BUNDLE / "plots"
     destination.mkdir(parents=True, exist_ok=True)
     for track, title in (("sft", "Supervised fine-tuning"), ("dpo_hh", "HH-RLHF DPO"), ("dpo_uf", "UltraFeedback DPO"), ("persona", "Persona LoRA-DPO")):
-        records = rows(ROOT / f"submission/27100384/evidence/training/{track}/metrics.jsonl")
+        records = rows(BUNDLE / f"evidence/training/{track}/metrics.jsonl")
         fig, ax = plt.subplots(figsize=(7, 3.5))
         fig.subplots_adjust(left=.11, right=.86, bottom=.31, top=.89)
         if track == "dpo_uf":
-            old = rows(ROOT / "outputs/downloads/main/pa2/outputs/dpo_uf/metrics.jsonl")
+            old = rows(BUNDLE / "evidence/training/dpo_uf/original_metrics.jsonl")
             discarded = [r for r in old if r.get("split") == "train" and r["step"] > 300]
             ax.plot([r["step"] for r in discarded], smoothed([r["train_loss"] for r in discarded]), color=".65", ls="--", label="Discarded original segment")
             records = [r for r in old if r.get("step", 999) <= 300] + records

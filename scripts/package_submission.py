@@ -15,9 +15,14 @@ def main():
     pages = len(PdfReader(report).pages)
     assert 1 <= pages <= 8
     assert json.loads((bundle / "evaluation/report_analysis.json").read_text())["reviewed"]
+    assert json.loads((bundle / "evidence/judging_audit.json").read_text())["primary_results_verified"]
+    review=json.loads((bundle / "evidence/report_visual_review.json").read_text())
+    assert review["all_pages_inspected"] and review["page_count"] == pages
+    assert review["pdf_sha256"] == hashlib.sha256(report.read_bytes()).hexdigest()
     for track in ("uf","hh","persona"):
         summary=json.loads((bundle / f"evaluation/{track}_summary.json").read_text())
         assert summary["counts"]["pending"] == 0
+        assert summary["judge_model"] == "google/gemini-3.6-flash"
     for path in (root / "outputs/downloads/main/backup_verified.json",
                  root / "outputs/downloads/uf_recovery/backup_verified.json"):
         assert json.loads(path.read_text())["verified"]

@@ -1,0 +1,27 @@
+{
+  "fingerprint": "607588d7d96c65a85e184047146260baae3cb2d2045ff9a370d624f3f33eb9a4",
+  "specification": {
+    "checkpoint": {
+      "model": "Qwen/Qwen2.5-0.5B",
+      "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+      "adapter": null,
+      "weight_hashes": {}
+    },
+    "generator": "base_alpaca",
+    "settings": {
+      "do_sample": false,
+      "max_new_tokens": 256,
+      "max_prompt_length": 512,
+      "repetition_penalty": 1.1,
+      "no_repeat_ngram_size": 4,
+      "temperature": 1.0,
+      "top_p": 1.0,
+      "num_beams": 1,
+      "length_penalty": 1.0
+    },
+    "prompt_format": "instruction",
+    "prompts_sha256": "778ccd7abd47bf142865c3e1d1fcccf47e425f4d6850383eb3c10007d6773eb1",
+    "chat_template": null,
+    "prompt_truncation": "head plus last min(32, max_prompt_length//4) tokens"
+  }
+}

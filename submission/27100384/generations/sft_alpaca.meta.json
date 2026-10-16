@@ -1,0 +1,29 @@
+{
+  "fingerprint": "9a9566a816c8754130ea9d8dfaa0bd0cbe07bb3bb394286abe73a025204fdcc8",
+  "specification": {
+    "checkpoint": {
+      "model": "/tmp/pa2_models/sft",
+      "revision": null,
+      "adapter": null,
+      "weight_hashes": {
+        "/tmp/pa2_models/sft/model.safetensors": "d75863fd41c1fbbced318cc3d8afe79e4a7a0eba4ee211ce30cef5298a5af7b0"
+      }
+    },
+    "generator": "sft_alpaca",
+    "settings": {
+      "do_sample": false,
+      "max_new_tokens": 256,
+      "max_prompt_length": 512,
+      "repetition_penalty": 1.1,
+      "no_repeat_ngram_size": 4,
+      "temperature": 1.0,
+      "top_p": 1.0,
+      "num_beams": 1,
+      "length_penalty": 1.0
+    },
+    "prompt_format": "instruction",
+    "prompts_sha256": "778ccd7abd47bf142865c3e1d1fcccf47e425f4d6850383eb3c10007d6773eb1",
+    "chat_template": null,
+    "prompt_truncation": "head plus last min(32, max_prompt_length//4) tokens"
+  }
+}
